@@ -1,0 +1,55 @@
+.assistant-answer { min-width: 0; }
+.chat-message .assistant-answer-text { color: var(--ink); }
+/* Questions need the same readable contrast as the answers beside them. */
+.chat-message.user > p { color: var(--ink); }
+.inline-citation {
+  display: inline-block;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  margin-inline: .15rem;
+  padding: .2rem .35rem;
+  border: 1px solid var(--control-line, #899d8e);
+  border-radius: .4rem;
+  background: var(--white);
+  color: var(--brand-dark);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+.assistant-source-list { margin-top: 1rem; min-width: 0; }
+.assistant-source-list h4 { font-size: .875rem; margin: 0 0 .4rem; color: var(--ink); }
+.assistant-source-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.assistant-source-list li { min-width: 0; }
+.assistant-source-list .assistant-source {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .2rem;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: .6rem;
+  border-color: var(--control-line, #899d8e);
+  color: var(--ink);
+  background: var(--white);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.assistant-source span { display: block; max-width: 100%; font-size: .8125rem; color: var(--muted); }
+.citation-snapshot { padding: 1.5rem; min-width: 0; color: var(--ink); }
+.citation-snapshot p { font-size: 1rem; }
+.citation-snapshot dl { margin: 1rem 0 1.5rem; }
+.citation-snapshot dl > div { padding: .65rem 0; border-bottom: 1px solid var(--line); }
+.citation-snapshot dt { font-weight: 700; }
+.citation-snapshot dd { margin: .25rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.citation-snapshot blockquote {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border-inline-start: .25rem solid var(--brand);
+  background: var(--surface-soft, #edf5ef);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.citation-snapshot-warning { padding: .75rem; border: 2px solid var(--amber); background: var(--white); }
+.citation-snapshot-boundary { margin-bottom: 0; color: var(--muted); }
+@media (max-width: 600px) { .citation-snapshot { padding: 1.1rem; } }

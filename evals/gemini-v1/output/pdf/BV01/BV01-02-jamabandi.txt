@@ -1,0 +1,18 @@
+FICTIONAL TEST DOCUMENT - NOT A GOVERNMENT RECORD
+काल्पनिक परीक्षण दस्तावेज़ - सरकारी रिकॉर्ड नहीं
+BhuVerify offline fixture BV01-D2
+
+Fictional Jamabandi excerpt - testing only
+
+District: Patna
+Anchal / circle: Danapur
+Mauza (fictional village): Kalpana Demo Mauza
+Khata: 0018
+Khesra: 0042
+This fictional record names Ravi Demo as the recorded owner.
+Jamabandi reference: DEMO-JB-101
+The recorded area is 8.
+The area unit written in this excerpt is decimal.
+The fictional record date is 2024-06-15.
+
+Fictional names and invented parcel data. No legal validity. No official verification.

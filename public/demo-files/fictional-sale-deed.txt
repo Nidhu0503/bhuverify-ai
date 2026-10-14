@@ -1,0 +1,20 @@
+BHUVERIFY — FICTIONAL PRACTICE DOCUMENT
+NOT A GOVERNMENT DOCUMENT. NOT VALID FOR ANY TRANSACTION.
+
+Document type: Sale deed (fictional)
+Seller: Dev Demo
+Buyer: Asha Demo
+District: Patna
+Circle: Bihta
+Mauza: Demo Nagar (fictional)
+Khata: DEMO-42
+Khesra: DEMO-118
+Area: 10
+Area unit: decimal
+Date: 2024-05-14
+Boundaries: North: demo lane; South: demo field; East: DEMO-119; West: demo canal
+
+Use this only to practice document extraction and manual review. When Gemini is
+configured, explicitly consent before sending this fictional file for extraction.
+Otherwise enter fields manually. Check every value and its complete source line.
+Add the fictional Jamabandi to demonstrate a plot-number mismatch.

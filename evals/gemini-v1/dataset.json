@@ -1,0 +1,2356 @@
+{
+  "version": "bhuverify-gemini-eval/v1",
+  "created": "2026-10-09",
+  "cases": [
+    {
+      "id": "BV01",
+      "category": "matching",
+      "split": "development",
+      "title": "Matching English text records",
+      "description": "Readable baseline with identical owner text, location, parcel and area; identifiers retain leading zeros.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Patna",
+        "circle": "Danapur",
+        "mauza": "Kalpana Demo Mauza",
+        "khata": "0018",
+        "khesra": "0042",
+        "seller": "Asha Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV01-D1",
+          "filename": "BV01-01-sale-deed.txt",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "txt",
+          "layout": "narrative",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Patna",
+                "Anchal / circle: Danapur",
+                "Mauza (fictional village): Kalpana Demo Mauza",
+                "Khata: 0018",
+                "Khesra: 0042",
+                "For this fictional transfer, the seller is Asha Demo.",
+                "The buyer named in this fictional transfer is Ravi Demo.",
+                "The transferred area is 8.",
+                "The area unit written in this excerpt is decimal.",
+                "The fictional transfer date is 2024-02-12."
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Patna", "page": 1, "quote": "District: Patna" },
+            "circle": { "value": "Danapur", "page": 1, "quote": "Anchal / circle: Danapur" },
+            "mauza": { "value": "Kalpana Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Kalpana Demo Mauza" },
+            "khata": { "value": "0018", "page": 1, "quote": "Khata: 0018" },
+            "khesra": { "value": "0042", "page": 1, "quote": "Khesra: 0042" },
+            "seller": { "value": "Asha Demo", "page": 1, "quote": "For this fictional transfer, the seller is Asha Demo." },
+            "buyer": { "value": "Ravi Demo", "page": 1, "quote": "The buyer named in this fictional transfer is Ravi Demo." },
+            "area": { "value": "8", "page": 1, "quote": "The transferred area is 8." },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "The area unit written in this excerpt is decimal." },
+            "date": { "value": "2024-02-12", "page": 1, "quote": "The fictional transfer date is 2024-02-12." }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV01-D2",
+          "filename": "BV01-02-jamabandi.txt",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "txt",
+          "layout": "narrative",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Patna",
+                "Anchal / circle: Danapur",
+                "Mauza (fictional village): Kalpana Demo Mauza",
+                "Khata: 0018",
+                "Khesra: 0042",
+                "This fictional record names Ravi Demo as the recorded owner.",
+                "Jamabandi reference: DEMO-JB-101",
+                "The recorded area is 8.",
+                "The area unit written in this excerpt is decimal.",
+                "The fictional record date is 2024-06-15."
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Patna", "page": 1, "quote": "District: Patna" },
+            "circle": { "value": "Danapur", "page": 1, "quote": "Anchal / circle: Danapur" },
+            "mauza": { "value": "Kalpana Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Kalpana Demo Mauza" },
+            "khata": { "value": "0018", "page": 1, "quote": "Khata: 0018" },
+            "khesra": { "value": "0042", "page": 1, "quote": "Khesra: 0042" },
+            "owner": { "value": "Ravi Demo", "page": 1, "quote": "This fictional record names Ravi Demo as the recorded owner." },
+            "jamabandi": { "value": "DEMO-JB-101", "page": 1, "quote": "Jamabandi reference: DEMO-JB-101" },
+            "area": { "value": "8", "page": 1, "quote": "The recorded area is 8." },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "The area unit written in this excerpt is decimal." },
+            "date": { "value": "2024-06-15", "page": 1, "quote": "The fictional record date is 2024-06-15." }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Extract both documents independently and preserve 0018 and 0042 exactly.",
+        "After source review, report only textual owner agreement and numerical area agreement.",
+        "Keep missing mutation, map and encumbrance evidence visible."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud."
+      ],
+      "assistantQuestion": "What agrees between these two fictional records, and what remains unchecked?",
+      "assistantMustMention": [
+        "The deed buyer and recorded owner both read Ravi Demo.",
+        "The two documents record 8 decimal for the same supplied parcel identifiers.",
+        "Official verification and missing supporting evidence remain outstanding."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV01-D1", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-BV01"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-BV01"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV02",
+      "category": "matching",
+      "split": "development",
+      "title": "Matching two-page PDF schedules",
+      "description": "Both files place location, plot identifiers and area on the second page.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Gaya",
+        "circle": "Tikari",
+        "mauza": "Udaan Demo Mauza",
+        "khata": "0027",
+        "khesra": "0119",
+        "seller": "Neel Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV02-D1",
+          "filename": "BV02-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "Seller: Neel Demo",
+                "Buyer: Tara Demo",
+                "Document date: 2023-08-19"
+              ]
+            },
+            {
+              "heading": "Fictional property schedule — testing only",
+              "lines": [
+                "District: Gaya",
+                "Anchal / circle: Tikari",
+                "Mauza (fictional village): Udaan Demo Mauza",
+                "Khata: 0027",
+                "Khesra: 0119",
+                "Area: 900",
+                "Area unit: sq ft"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "seller": { "value": "Neel Demo", "page": 1, "quote": "Seller: Neel Demo" },
+            "buyer": { "value": "Tara Demo", "page": 1, "quote": "Buyer: Tara Demo" },
+            "date": { "value": "2023-08-19", "page": 1, "quote": "Document date: 2023-08-19" },
+            "district": { "value": "Gaya", "page": 2, "quote": "District: Gaya" },
+            "circle": { "value": "Tikari", "page": 2, "quote": "Anchal / circle: Tikari" },
+            "mauza": { "value": "Udaan Demo Mauza", "page": 2, "quote": "Mauza (fictional village): Udaan Demo Mauza" },
+            "khata": { "value": "0027", "page": 2, "quote": "Khata: 0027" },
+            "khesra": { "value": "0119", "page": 2, "quote": "Khesra: 0119" },
+            "area": { "value": "900", "page": 2, "quote": "Area: 900" },
+            "areaUnit": { "value": "sq ft", "page": 2, "quote": "Area unit: sq ft" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "The property schedule is on page 2; party names and document date are on page 1."
+          ]
+        },
+        {
+          "id": "BV02-D2",
+          "filename": "BV02-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "Recorded owner: Tara Demo",
+                "Jamabandi reference: DEMO-JB-202",
+                "Document date: 2024-01-09"
+              ]
+            },
+            {
+              "heading": "Fictional property schedule — testing only",
+              "lines": [
+                "District: Gaya",
+                "Anchal / circle: Tikari",
+                "Mauza (fictional village): Udaan Demo Mauza",
+                "Khata: 0027",
+                "Khesra: 0119",
+                "Area: 900",
+                "Area unit: sq ft"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "owner": { "value": "Tara Demo", "page": 1, "quote": "Recorded owner: Tara Demo" },
+            "jamabandi": { "value": "DEMO-JB-202", "page": 1, "quote": "Jamabandi reference: DEMO-JB-202" },
+            "date": { "value": "2024-01-09", "page": 1, "quote": "Document date: 2024-01-09" },
+            "district": { "value": "Gaya", "page": 2, "quote": "District: Gaya" },
+            "circle": { "value": "Tikari", "page": 2, "quote": "Anchal / circle: Tikari" },
+            "mauza": { "value": "Udaan Demo Mauza", "page": 2, "quote": "Mauza (fictional village): Udaan Demo Mauza" },
+            "khata": { "value": "0027", "page": 2, "quote": "Khata: 0027" },
+            "khesra": { "value": "0119", "page": 2, "quote": "Khesra: 0119" },
+            "area": { "value": "900", "page": 2, "quote": "Area: 900" },
+            "areaUnit": { "value": "sq ft", "page": 2, "quote": "Area unit: sq ft" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "Citations for the parcel and area must reference page 2, not page 1."
+          ]
+        }
+      ],
+      "expectedBehavior": [
+        "Read both pages of each file.",
+        "Cite page 2 for the schedule and page 1 for names and dates.",
+        "Do not treat a matching fictional record as proof of title."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud."
+      ],
+      "assistantQuestion": "Compare the parcel and area details and tell me which pages support them.",
+      "assistantMustMention": [
+        "The property schedules are on page 2 of both files.",
+        "Both schedules record khata 0027, khesra 0119 and 900 sq ft.",
+        "The matching names and numbers are not official authentication."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV02-D1", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-BV02"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-BV02"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV03",
+      "category": "matching",
+      "split": "holdout",
+      "title": "Equivalent supported units",
+      "description": "The deed expresses a quarter acre; the later record expresses 25 decimal.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Nalanda",
+        "circle": "Bihar Sharif",
+        "mauza": "Prerna Demo Mauza",
+        "khata": "0063",
+        "khesra": "0284",
+        "seller": "Kabir Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV03-D1",
+          "filename": "BV03-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Nalanda",
+                "Anchal / circle: Bihar Sharif",
+                "Mauza (fictional village): Prerna Demo Mauza",
+                "Khata: 0063",
+                "Khesra: 0284",
+                "Seller: Kabir Demo",
+                "Buyer: Sana Demo",
+                "Area: 0.25",
+                "Area unit: acre",
+                "Document date: 2022-11-21"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Nalanda", "page": 1, "quote": "District: Nalanda" },
+            "circle": { "value": "Bihar Sharif", "page": 1, "quote": "Anchal / circle: Bihar Sharif" },
+            "mauza": { "value": "Prerna Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Prerna Demo Mauza" },
+            "khata": { "value": "0063", "page": 1, "quote": "Khata: 0063" },
+            "khesra": { "value": "0284", "page": 1, "quote": "Khesra: 0284" },
+            "seller": { "value": "Kabir Demo", "page": 1, "quote": "Seller: Kabir Demo" },
+            "buyer": { "value": "Sana Demo", "page": 1, "quote": "Buyer: Sana Demo" },
+            "area": { "value": "0.25", "page": 1, "quote": "Area: 0.25" },
+            "areaUnit": { "value": "acre", "page": 1, "quote": "Area unit: acre" },
+            "date": { "value": "2022-11-21", "page": 1, "quote": "Document date: 2022-11-21" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV03-D2",
+          "filename": "BV03-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Nalanda",
+                "Anchal / circle: Bihar Sharif",
+                "Mauza (fictional village): Prerna Demo Mauza",
+                "Khata: 0063",
+                "Khesra: 0284",
+                "Recorded owner: Sana Demo",
+                "Jamabandi reference: DEMO-JB-303",
+                "Area: 25",
+                "Area unit: decimal",
+                "Document date: 2023-03-07"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Nalanda", "page": 1, "quote": "District: Nalanda" },
+            "circle": { "value": "Bihar Sharif", "page": 1, "quote": "Anchal / circle: Bihar Sharif" },
+            "mauza": { "value": "Prerna Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Prerna Demo Mauza" },
+            "khata": { "value": "0063", "page": 1, "quote": "Khata: 0063" },
+            "khesra": { "value": "0284", "page": 1, "quote": "Khesra: 0284" },
+            "owner": { "value": "Sana Demo", "page": 1, "quote": "Recorded owner: Sana Demo" },
+            "jamabandi": { "value": "DEMO-JB-303", "page": 1, "quote": "Jamabandi reference: DEMO-JB-303" },
+            "area": { "value": "25", "page": 1, "quote": "Area: 25" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2023-03-07", "page": 1, "quote": "Document date: 2023-03-07" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Extract the original quantities and units; do not replace either source value with a conversion.",
+        "Let the deterministic supported-unit conversion establish numerical agreement after review.",
+        "Distinguish numerical area comparison from physical measurement."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "Different raw area numbers alone prove an area discrepancy."
+      ],
+      "assistantQuestion": "The area numbers differ. Do these units explain the difference?",
+      "assistantMustMention": [
+        "The source values are 0.25 acre and 25 decimal.",
+        "The supported conversion makes these areas equal.",
+        "A numerical match does not verify physical boundaries or legal title."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV03-D1", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-BV03",
+            "unit-"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-BV03",
+            "unit-"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV04",
+      "category": "conflict",
+      "split": "development",
+      "title": "Different plot numbers",
+      "description": "Same fictional location and khata, but the source khesra values are different; the case reference intentionally does not supply a plot number.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Muzaffarpur",
+        "circle": "Mushahari",
+        "mauza": "Savera Demo Mauza",
+        "khata": "0045",
+        "khesra": "",
+        "seller": "Dev Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV04-D1",
+          "filename": "BV04-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Muzaffarpur",
+                "Anchal / circle: Mushahari",
+                "Mauza (fictional village): Savera Demo Mauza",
+                "Khata: 0045",
+                "Khesra: 0712",
+                "Seller: Dev Demo",
+                "Buyer: Naina Demo",
+                "Area: 14",
+                "Area unit: decimal",
+                "Document date: 2024-03-18"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Muzaffarpur", "page": 1, "quote": "District: Muzaffarpur" },
+            "circle": { "value": "Mushahari", "page": 1, "quote": "Anchal / circle: Mushahari" },
+            "mauza": { "value": "Savera Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Savera Demo Mauza" },
+            "khata": { "value": "0045", "page": 1, "quote": "Khata: 0045" },
+            "khesra": { "value": "0712", "page": 1, "quote": "Khesra: 0712" },
+            "seller": { "value": "Dev Demo", "page": 1, "quote": "Seller: Dev Demo" },
+            "buyer": { "value": "Naina Demo", "page": 1, "quote": "Buyer: Naina Demo" },
+            "area": { "value": "14", "page": 1, "quote": "Area: 14" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2024-03-18", "page": 1, "quote": "Document date: 2024-03-18" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV04-D2",
+          "filename": "BV04-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Muzaffarpur",
+                "Anchal / circle: Mushahari",
+                "Mauza (fictional village): Savera Demo Mauza",
+                "Khata: 0045",
+                "Khesra: 0721",
+                "Recorded owner: Naina Demo",
+                "Jamabandi reference: DEMO-JB-404",
+                "Area: 14",
+                "Area unit: decimal",
+                "Document date: 2024-09-02"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Muzaffarpur", "page": 1, "quote": "District: Muzaffarpur" },
+            "circle": { "value": "Mushahari", "page": 1, "quote": "Anchal / circle: Mushahari" },
+            "mauza": { "value": "Savera Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Savera Demo Mauza" },
+            "khata": { "value": "0045", "page": 1, "quote": "Khata: 0045" },
+            "khesra": { "value": "0721", "page": 1, "quote": "Khesra: 0721" },
+            "owner": { "value": "Naina Demo", "page": 1, "quote": "Recorded owner: Naina Demo" },
+            "jamabandi": { "value": "DEMO-JB-404", "page": 1, "quote": "Jamabandi reference: DEMO-JB-404" },
+            "area": { "value": "14", "page": 1, "quote": "Area: 14" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2024-09-02", "page": 1, "quote": "Document date: 2024-09-02" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Preserve 0712 and 0721 separately rather than harmonizing them.",
+        "The identifier discrepancy is review before manual review and attention afterward.",
+        "Do not compare area or owner as though same-parcel identity has been established."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud."
+      ],
+      "assistantQuestion": "Can these files be treated as evidence for the same plot?",
+      "assistantMustMention": [
+        "The deed records khesra 0712 and the Jamabandi records 0721.",
+        "Matching location and khata do not resolve the different khesra numbers.",
+        "Check the original schedules and current official records; this is not proof of fraud."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV04-D1", "severity": "review" },
+            { "idPrefix": "identifier-khesra-", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "area-agrees-",
+            "area-BV04",
+            "owner-name-agrees",
+            "owner-sequence",
+            "case-reference-khesra-"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "identifier-khesra-", "severity": "attention" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "area-agrees-",
+            "area-BV04",
+            "owner-name-agrees",
+            "owner-sequence",
+            "case-reference-khesra-"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV05",
+      "category": "conflict",
+      "split": "development",
+      "title": "Different recorded areas",
+      "description": "The same supplied parcel has 12 decimal in one file and 15 decimal in the other; the documents do not explain whether a partial share was transferred.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Darbhanga",
+        "circle": "Bahadurpur",
+        "mauza": "Nirmal Demo Mauza",
+        "khata": "0086",
+        "khesra": "0325",
+        "seller": "Arun Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV05-D1",
+          "filename": "BV05-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Darbhanga",
+                "Anchal / circle: Bahadurpur",
+                "Mauza (fictional village): Nirmal Demo Mauza",
+                "Khata: 0086",
+                "Khesra: 0325",
+                "Seller: Arun Demo",
+                "Buyer: Kavya Demo",
+                "Area: 12",
+                "Area unit: decimal",
+                "Document date: 2025-01-14"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Darbhanga", "page": 1, "quote": "District: Darbhanga" },
+            "circle": { "value": "Bahadurpur", "page": 1, "quote": "Anchal / circle: Bahadurpur" },
+            "mauza": { "value": "Nirmal Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Nirmal Demo Mauza" },
+            "khata": { "value": "0086", "page": 1, "quote": "Khata: 0086" },
+            "khesra": { "value": "0325", "page": 1, "quote": "Khesra: 0325" },
+            "seller": { "value": "Arun Demo", "page": 1, "quote": "Seller: Arun Demo" },
+            "buyer": { "value": "Kavya Demo", "page": 1, "quote": "Buyer: Kavya Demo" },
+            "area": { "value": "12", "page": 1, "quote": "Area: 12" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-01-14", "page": 1, "quote": "Document date: 2025-01-14" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV05-D2",
+          "filename": "BV05-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Darbhanga",
+                "Anchal / circle: Bahadurpur",
+                "Mauza (fictional village): Nirmal Demo Mauza",
+                "Khata: 0086",
+                "Khesra: 0325",
+                "Recorded owner: Kavya Demo",
+                "Jamabandi reference: DEMO-JB-505",
+                "Area: 15",
+                "Area unit: decimal",
+                "Document date: 2025-05-22"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Darbhanga", "page": 1, "quote": "District: Darbhanga" },
+            "circle": { "value": "Bahadurpur", "page": 1, "quote": "Anchal / circle: Bahadurpur" },
+            "mauza": { "value": "Nirmal Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Nirmal Demo Mauza" },
+            "khata": { "value": "0086", "page": 1, "quote": "Khata: 0086" },
+            "khesra": { "value": "0325", "page": 1, "quote": "Khesra: 0325" },
+            "owner": { "value": "Kavya Demo", "page": 1, "quote": "Recorded owner: Kavya Demo" },
+            "jamabandi": { "value": "DEMO-JB-505", "page": 1, "quote": "Jamabandi reference: DEMO-JB-505" },
+            "area": { "value": "15", "page": 1, "quote": "Area: 15" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-05-22", "page": 1, "quote": "Document date: 2025-05-22" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Preserve each area exactly.",
+        "Flag recorded-area difference for review, not automatically fraud.",
+        "Do not assume that the deed transfers the complete holding."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud."
+      ],
+      "assistantQuestion": "Why do these area entries need follow-up?",
+      "assistantMustMention": [
+        "The deed states 12 decimal and the Jamabandi states 15 decimal.",
+        "A transferred share or survey difference could explain the mismatch and needs evidence.",
+        "Do not infer an unrecorded share or conclude fraud."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV05-D1", "severity": "review" },
+            { "idPrefix": "area-BV05-D1-BV05-D2", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-agrees-"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "area-BV05-D1-BV05-D2", "severity": "review" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-agrees-"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV06",
+      "category": "conflict",
+      "split": "holdout",
+      "title": "Later record names a different owner",
+      "description": "The Jamabandi is later than the deed, names a different person, and no mutation acknowledgement is supplied.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Bhagalpur",
+        "circle": "Jagdishpur",
+        "mauza": "Navrang Demo Mauza",
+        "khata": "0039",
+        "khesra": "0187",
+        "seller": "Mohan Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV06-D1",
+          "filename": "BV06-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Bhagalpur",
+                "Anchal / circle: Jagdishpur",
+                "Mauza (fictional village): Navrang Demo Mauza",
+                "Khata: 0039",
+                "Khesra: 0187",
+                "Seller: Mohan Demo",
+                "Buyer: Isha Demo",
+                "Area: 600",
+                "Area unit: sq m",
+                "Document date: 2025-10-16"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Bhagalpur", "page": 1, "quote": "District: Bhagalpur" },
+            "circle": { "value": "Jagdishpur", "page": 1, "quote": "Anchal / circle: Jagdishpur" },
+            "mauza": { "value": "Navrang Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Navrang Demo Mauza" },
+            "khata": { "value": "0039", "page": 1, "quote": "Khata: 0039" },
+            "khesra": { "value": "0187", "page": 1, "quote": "Khesra: 0187" },
+            "seller": { "value": "Mohan Demo", "page": 1, "quote": "Seller: Mohan Demo" },
+            "buyer": { "value": "Isha Demo", "page": 1, "quote": "Buyer: Isha Demo" },
+            "area": { "value": "600", "page": 1, "quote": "Area: 600" },
+            "areaUnit": { "value": "sq m", "page": 1, "quote": "Area unit: sq m" },
+            "date": { "value": "2025-10-16", "page": 1, "quote": "Document date: 2025-10-16" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV06-D2",
+          "filename": "BV06-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Bhagalpur",
+                "Anchal / circle: Jagdishpur",
+                "Mauza (fictional village): Navrang Demo Mauza",
+                "Khata: 0039",
+                "Khesra: 0187",
+                "Recorded owner: Karan Demo",
+                "Jamabandi reference: DEMO-JB-606",
+                "Area: 600",
+                "Area unit: sq m",
+                "Document date: 2026-06-20"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Bhagalpur", "page": 1, "quote": "District: Bhagalpur" },
+            "circle": { "value": "Jagdishpur", "page": 1, "quote": "Anchal / circle: Jagdishpur" },
+            "mauza": { "value": "Navrang Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Navrang Demo Mauza" },
+            "khata": { "value": "0039", "page": 1, "quote": "Khata: 0039" },
+            "khesra": { "value": "0187", "page": 1, "quote": "Khesra: 0187" },
+            "owner": { "value": "Karan Demo", "page": 1, "quote": "Recorded owner: Karan Demo" },
+            "jamabandi": { "value": "DEMO-JB-606", "page": 1, "quote": "Jamabandi reference: DEMO-JB-606" },
+            "area": { "value": "600", "page": 1, "quote": "Area: 600" },
+            "areaUnit": { "value": "sq m", "page": 1, "quote": "Area unit: sq m" },
+            "date": { "value": "2026-06-20", "page": 1, "quote": "Document date: 2026-06-20" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Keep buyer Isha Demo separate from recorded owner Karan Demo.",
+        "Recognize the Jamabandi is later, not historical relative to this deed.",
+        "The reviewed owner-sequence rule needs attention, but cannot establish fraud or the correct legal owner."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "The Jamabandi predates the deed.",
+        "A pending mutation is documented in this set."
+      ],
+      "assistantQuestion": "Does the date sequence explain why the owner names differ?",
+      "assistantMustMention": [
+        "The deed dated 2025-10-16 names Isha Demo as buyer.",
+        "The later Jamabandi dated 2026-06-20 names Karan Demo.",
+        "These files do not supply a complete transfer chain or pending mutation explanation."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV06-D1", "severity": "review" },
+            { "idPrefix": "owner-sequence", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-name-agrees",
+            "area-BV06",
+            "mutation-pending-"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "owner-sequence", "severity": "attention" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-name-agrees",
+            "area-BV06",
+            "mutation-pending-"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV07",
+      "category": "missing",
+      "split": "development",
+      "title": "Area unit absent from the deed",
+      "description": "The deed gives an area quantity without a unit; only the Jamabandi names decimal.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Purnia",
+        "circle": "Purnia East",
+        "mauza": "Aangan Demo Mauza",
+        "khata": "0058",
+        "khesra": "0236",
+        "seller": "Suman Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV07-D1",
+          "filename": "BV07-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Purnia",
+                "Anchal / circle: Purnia East",
+                "Mauza (fictional village): Aangan Demo Mauza",
+                "Khata: 0058",
+                "Khesra: 0236",
+                "Seller: Suman Demo",
+                "Buyer: Varun Demo",
+                "Area: 11",
+                "Document date: 2024-07-11"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Purnia", "page": 1, "quote": "District: Purnia" },
+            "circle": { "value": "Purnia East", "page": 1, "quote": "Anchal / circle: Purnia East" },
+            "mauza": { "value": "Aangan Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Aangan Demo Mauza" },
+            "khata": { "value": "0058", "page": 1, "quote": "Khata: 0058" },
+            "khesra": { "value": "0236", "page": 1, "quote": "Khesra: 0236" },
+            "seller": { "value": "Suman Demo", "page": 1, "quote": "Seller: Suman Demo" },
+            "buyer": { "value": "Varun Demo", "page": 1, "quote": "Buyer: Varun Demo" },
+            "area": { "value": "11", "page": 1, "quote": "Area: 11" },
+            "date": { "value": "2024-07-11", "page": 1, "quote": "Document date: 2024-07-11" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "The source contains no area-unit row. Absence is not an unreadable field and must not be filled from the other document."
+          ]
+        },
+        {
+          "id": "BV07-D2",
+          "filename": "BV07-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Purnia",
+                "Anchal / circle: Purnia East",
+                "Mauza (fictional village): Aangan Demo Mauza",
+                "Khata: 0058",
+                "Khesra: 0236",
+                "Recorded owner: Varun Demo",
+                "Jamabandi reference: DEMO-JB-707",
+                "Area: 11",
+                "Area unit: decimal",
+                "Document date: 2024-12-04"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Purnia", "page": 1, "quote": "District: Purnia" },
+            "circle": { "value": "Purnia East", "page": 1, "quote": "Anchal / circle: Purnia East" },
+            "mauza": { "value": "Aangan Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Aangan Demo Mauza" },
+            "khata": { "value": "0058", "page": 1, "quote": "Khata: 0058" },
+            "khesra": { "value": "0236", "page": 1, "quote": "Khesra: 0236" },
+            "owner": { "value": "Varun Demo", "page": 1, "quote": "Recorded owner: Varun Demo" },
+            "jamabandi": { "value": "DEMO-JB-707", "page": 1, "quote": "Jamabandi reference: DEMO-JB-707" },
+            "area": { "value": "11", "page": 1, "quote": "Area: 11" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2024-12-04", "page": 1, "quote": "Document date: 2024-12-04" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Omit areaUnit from the deed extraction.",
+        "Do not borrow decimal from the Jamabandi or infer a local default.",
+        "Keep area comparison unresolved until the deed unit is supported."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "The deed states its area is 11 decimal."
+      ],
+      "assistantQuestion": "Both files say 11. Can I treat the areas as equal?",
+      "assistantMustMention": [
+        "The deed states 11 but supplies no area unit.",
+        "The Jamabandi states 11 decimal.",
+        "Equal quantities without supported units do not establish equal areas."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV07-D1", "severity": "review" },
+            { "idPrefix": "unit-BV07-D1", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV07"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "unit-BV07-D1", "severity": "unknown" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV07"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV08",
+      "category": "missing",
+      "split": "development",
+      "title": "Buyer and recorded owner absent",
+      "description": "Two incomplete excerpts contain the parcel and area but omit the buyer and recorded-owner names.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Begusarai",
+        "circle": "Begusarai",
+        "mauza": "Sankalp Demo Mauza",
+        "khata": "0074",
+        "khesra": "0358",
+        "seller": "Renu Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV08-D1",
+          "filename": "BV08-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Begusarai",
+                "Anchal / circle: Begusarai",
+                "Mauza (fictional village): Sankalp Demo Mauza",
+                "Khata: 0074",
+                "Khesra: 0358",
+                "Seller: Renu Demo",
+                "Area: 750",
+                "Area unit: sq ft",
+                "Document date: 2023-04-26"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Begusarai", "page": 1, "quote": "District: Begusarai" },
+            "circle": { "value": "Begusarai", "page": 1, "quote": "Anchal / circle: Begusarai" },
+            "mauza": { "value": "Sankalp Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Sankalp Demo Mauza" },
+            "khata": { "value": "0074", "page": 1, "quote": "Khata: 0074" },
+            "khesra": { "value": "0358", "page": 1, "quote": "Khesra: 0358" },
+            "seller": { "value": "Renu Demo", "page": 1, "quote": "Seller: Renu Demo" },
+            "area": { "value": "750", "page": 1, "quote": "Area: 750" },
+            "areaUnit": { "value": "sq ft", "page": 1, "quote": "Area unit: sq ft" },
+            "date": { "value": "2023-04-26", "page": 1, "quote": "Document date: 2023-04-26" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "Buyer information is absent from this intentionally incomplete excerpt."
+          ]
+        },
+        {
+          "id": "BV08-D2",
+          "filename": "BV08-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Begusarai",
+                "Anchal / circle: Begusarai",
+                "Mauza (fictional village): Sankalp Demo Mauza",
+                "Khata: 0074",
+                "Khesra: 0358",
+                "Jamabandi reference: DEMO-JB-808",
+                "Area: 750",
+                "Area unit: sq ft",
+                "Document date: 2023-11-13"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Begusarai", "page": 1, "quote": "District: Begusarai" },
+            "circle": { "value": "Begusarai", "page": 1, "quote": "Anchal / circle: Begusarai" },
+            "mauza": { "value": "Sankalp Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Sankalp Demo Mauza" },
+            "khata": { "value": "0074", "page": 1, "quote": "Khata: 0074" },
+            "khesra": { "value": "0358", "page": 1, "quote": "Khesra: 0358" },
+            "jamabandi": { "value": "DEMO-JB-808", "page": 1, "quote": "Jamabandi reference: DEMO-JB-808" },
+            "area": { "value": "750", "page": 1, "quote": "Area: 750" },
+            "areaUnit": { "value": "sq ft", "page": 1, "quote": "Area unit: sq ft" },
+            "date": { "value": "2023-11-13", "page": 1, "quote": "Document date: 2023-11-13" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "Recorded-owner information is absent; do not infer it from the deed seller."
+          ]
+        }
+      ],
+      "expectedBehavior": [
+        "Omit buyer from the deed and owner from the Jamabandi.",
+        "Do not promote the seller into buyer or owner.",
+        "Report missing content and unresolved owner comparison, even when areas agree."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "Renu Demo is named as the buyer or recorded owner."
+      ],
+      "assistantQuestion": "Who owns the land according to these uploaded excerpts?",
+      "assistantMustMention": [
+        "The deed buyer is absent and the Jamabandi recorded owner is absent.",
+        "Renu Demo is labelled only as seller in the deed.",
+        "The excerpts cannot support an owner-name comparison or legal ownership conclusion."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV08-D1", "severity": "review" },
+            { "idPrefix": "content-BV08-D1", "severity": "unknown" },
+            { "idPrefix": "content-BV08-D2", "severity": "unknown" },
+            { "idPrefix": "owner-missing", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "owner-name-agrees",
+            "area-BV08"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "content-BV08-D1", "severity": "unknown" },
+            { "idPrefix": "content-BV08-D2", "severity": "unknown" },
+            { "idPrefix": "owner-missing", "severity": "unknown" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "owner-name-agrees",
+            "area-BV08"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV09",
+      "category": "missing",
+      "split": "holdout",
+      "title": "No Jamabandi supplied",
+      "description": "Only one fictional sale-deed excerpt is supplied; there is no second document to compare.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Samastipur",
+        "circle": "Samastipur",
+        "mauza": "Ujjwal Demo Mauza",
+        "khata": "0092",
+        "khesra": "0416",
+        "seller": "Pankaj Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV09-D1",
+          "filename": "BV09-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Samastipur",
+                "Anchal / circle: Samastipur",
+                "Mauza (fictional village): Ujjwal Demo Mauza",
+                "Khata: 0092",
+                "Khesra: 0416",
+                "Seller: Pankaj Demo",
+                "Buyer: Leela Demo",
+                "Area: 18",
+                "Area unit: decimal",
+                "Document date: 2025-08-05"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Samastipur", "page": 1, "quote": "District: Samastipur" },
+            "circle": { "value": "Samastipur", "page": 1, "quote": "Anchal / circle: Samastipur" },
+            "mauza": { "value": "Ujjwal Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Ujjwal Demo Mauza" },
+            "khata": { "value": "0092", "page": 1, "quote": "Khata: 0092" },
+            "khesra": { "value": "0416", "page": 1, "quote": "Khesra: 0416" },
+            "seller": { "value": "Pankaj Demo", "page": 1, "quote": "Seller: Pankaj Demo" },
+            "buyer": { "value": "Leela Demo", "page": 1, "quote": "Buyer: Leela Demo" },
+            "area": { "value": "18", "page": 1, "quote": "Area: 18" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-08-05", "page": 1, "quote": "Document date: 2025-08-05" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Extract only the uploaded deed.",
+        "Report the missing Jamabandi and other checklist evidence.",
+        "Do not invent a current recorded owner or a cross-document agreement."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "A Jamabandi was uploaded or checked."
+      ],
+      "assistantQuestion": "Is the deed alone enough for BhuVerify to confirm the current owner?",
+      "assistantMustMention": [
+        "Only a sale-deed excerpt was supplied.",
+        "No Jamabandi is available for a recorded-owner comparison.",
+        "The deed names Leela Demo as buyer, but does not establish current verified ownership."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-jamabandi", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV09-D1", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "owner-name-agrees",
+            "owner-sequence",
+            "area-agrees-",
+            "identifier-"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-jamabandi", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "owner-name-agrees",
+            "owner-sequence",
+            "area-agrees-",
+            "identifier-"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV10",
+      "category": "language",
+      "split": "development",
+      "title": "Hindi with leading-zero identifiers",
+      "description": "Hindi records use Devanagari digits; the deed retains leading zeros while the Jamabandi does not.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Patna",
+        "circle": "दानापुर",
+        "mauza": "कल्पतरु डेमो मौजा",
+        "khata": "००७२",
+        "khesra": "००१४",
+        "seller": "आशा डेमो",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV10-D1",
+          "filename": "BV10-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "hi",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "काल्पनिक विक्रय विवरण — केवल परीक्षण",
+              "lines": [
+                "जिला: पटना",
+                "अंचल: दानापुर",
+                "मौजा (काल्पनिक गाँव): कल्पतरु डेमो मौजा",
+                "खाता: ००७२",
+                "खेसरा: ००१४",
+                "विक्रेता: आशा डेमो",
+                "क्रेता: विवेक डेमो",
+                "रकबा: ९",
+                "रकबा इकाई: डिसमिल",
+                "दस्तावेज की तारीख: 2024-05-17"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "पटना", "page": 1, "quote": "जिला: पटना" },
+            "circle": { "value": "दानापुर", "page": 1, "quote": "अंचल: दानापुर" },
+            "mauza": { "value": "कल्पतरु डेमो मौजा", "page": 1, "quote": "मौजा (काल्पनिक गाँव): कल्पतरु डेमो मौजा" },
+            "khata": { "value": "००७२", "page": 1, "quote": "खाता: ००७२" },
+            "khesra": { "value": "००१४", "page": 1, "quote": "खेसरा: ००१४" },
+            "seller": { "value": "आशा डेमो", "page": 1, "quote": "विक्रेता: आशा डेमो" },
+            "buyer": { "value": "विवेक डेमो", "page": 1, "quote": "क्रेता: विवेक डेमो" },
+            "area": { "value": "९", "page": 1, "quote": "रकबा: ९" },
+            "areaUnit": { "value": "डिसमिल", "page": 1, "quote": "रकबा इकाई: डिसमिल" },
+            "date": { "value": "2024-05-17", "page": 1, "quote": "दस्तावेज की तारीख: 2024-05-17" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV10-D2",
+          "filename": "BV10-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "hi",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "काल्पनिक जमाबंदी विवरण — केवल परीक्षण",
+              "lines": [
+                "जिला: पटना",
+                "अंचल: दानापुर",
+                "मौजा (काल्पनिक गाँव): कल्पतरु डेमो मौजा",
+                "खाता: ७२",
+                "खेसरा: १४",
+                "दर्ज रैयत: विवेक डेमो",
+                "जमाबंदी संदर्भ: डेमो-जमाबंदी-१०१०",
+                "रकबा: ९",
+                "रकबा इकाई: डिसमिल",
+                "दस्तावेज की तारीख: 2024-10-24"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "पटना", "page": 1, "quote": "जिला: पटना" },
+            "circle": { "value": "दानापुर", "page": 1, "quote": "अंचल: दानापुर" },
+            "mauza": { "value": "कल्पतरु डेमो मौजा", "page": 1, "quote": "मौजा (काल्पनिक गाँव): कल्पतरु डेमो मौजा" },
+            "khata": { "value": "७२", "page": 1, "quote": "खाता: ७२" },
+            "khesra": { "value": "१४", "page": 1, "quote": "खेसरा: १४" },
+            "owner": { "value": "विवेक डेमो", "page": 1, "quote": "दर्ज रैयत: विवेक डेमो" },
+            "jamabandi": { "value": "डेमो-जमाबंदी-१०१०", "page": 1, "quote": "जमाबंदी संदर्भ: डेमो-जमाबंदी-१०१०" },
+            "area": { "value": "९", "page": 1, "quote": "रकबा: ९" },
+            "areaUnit": { "value": "डिसमिल", "page": 1, "quote": "रकबा इकाई: डिसमिल" },
+            "date": { "value": "2024-10-24", "page": 1, "quote": "दस्तावेज की तारीख: 2024-10-24" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Preserve the original Devanagari digits and leading zeros in each extraction.",
+        "Do not transliterate names or locations in source field values.",
+        "The comparison rules normalize digits and leading zeros without rewriting the source evidence.",
+        "The UI district selector uses English while these source districts are Hindi. Existing raw-text comparison emits case-location review; this is an application transliteration limitation, not a Gemini extraction error."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "Leading zeros alone establish different plots."
+      ],
+      "assistantQuestion": "इन काल्पनिक अभिलेखों में खाता और खेसरा के आगे लगे शून्य क्या अंतर बताते हैं?",
+      "assistantMustMention": [
+        "खाता ००७२ और ७२ तथा खेसरा ००१४ और १४ संख्यात्मक रूप से समान हैं।",
+        "दोनों में विवेक डेमो और ९ डिसमिल लिखा है।",
+        "पाठ का मेल आधिकारिक स्वामित्व सत्यापन नहीं है।"
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV10-D1", "severity": "review" },
+            { "idPrefix": "case-location-BV10-D1", "severity": "review" },
+            { "idPrefix": "case-location-BV10-D2", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "geography-",
+            "case-reference-",
+            "area-BV10",
+            "unit-"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" },
+            { "idPrefix": "case-location-BV10-D1", "severity": "review" },
+            { "idPrefix": "case-location-BV10-D2", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "geography-",
+            "case-reference-",
+            "area-BV10",
+            "unit-"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV11",
+      "category": "language",
+      "split": "development",
+      "title": "Hindi katha without a conversion factor",
+      "description": "Clear Hindi image documents both use a local land unit; no conversion standard is provided.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Gaya",
+        "circle": "टिकारी",
+        "mauza": "नवदीप डेमो मौजा",
+        "khata": "००८१",
+        "khesra": "०२४९",
+        "seller": "किरण डेमो",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV11-D1",
+          "filename": "BV11-01-sale-deed.png",
+          "kind": "sale_deed",
+          "language": "hi",
+          "format": "png",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "काल्पनिक विक्रय विवरण — केवल परीक्षण",
+              "lines": [
+                "जिला: गया",
+                "अंचल: टिकारी",
+                "मौजा (काल्पनिक गाँव): नवदीप डेमो मौजा",
+                "खाता: ००८१",
+                "खेसरा: ०२४९",
+                "विक्रेता: किरण डेमो",
+                "क्रेता: नेहा डेमो",
+                "रकबा: २",
+                "रकबा इकाई: कट्ठा",
+                "दस्तावेज की तारीख: 2025-02-28"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "गया", "page": 1, "quote": "जिला: गया" },
+            "circle": { "value": "टिकारी", "page": 1, "quote": "अंचल: टिकारी" },
+            "mauza": { "value": "नवदीप डेमो मौजा", "page": 1, "quote": "मौजा (काल्पनिक गाँव): नवदीप डेमो मौजा" },
+            "khata": { "value": "००८१", "page": 1, "quote": "खाता: ००८१" },
+            "khesra": { "value": "०२४९", "page": 1, "quote": "खेसरा: ०२४९" },
+            "seller": { "value": "किरण डेमो", "page": 1, "quote": "विक्रेता: किरण डेमो" },
+            "buyer": { "value": "नेहा डेमो", "page": 1, "quote": "क्रेता: नेहा डेमो" },
+            "area": { "value": "२", "page": 1, "quote": "रकबा: २" },
+            "areaUnit": { "value": "कट्ठा", "page": 1, "quote": "रकबा इकाई: कट्ठा" },
+            "date": { "value": "2025-02-28", "page": 1, "quote": "दस्तावेज की तारीख: 2025-02-28" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV11-D2",
+          "filename": "BV11-02-jamabandi.png",
+          "kind": "jamabandi",
+          "language": "hi",
+          "format": "png",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "काल्पनिक जमाबंदी विवरण — केवल परीक्षण",
+              "lines": [
+                "जिला: गया",
+                "अंचल: टिकारी",
+                "मौजा (काल्पनिक गाँव): नवदीप डेमो मौजा",
+                "खाता: ००८१",
+                "खेसरा: ०२४९",
+                "दर्ज रैयत: नेहा डेमो",
+                "जमाबंदी संदर्भ: डेमो-जमाबंदी-११११",
+                "रकबा: २",
+                "रकबा इकाई: कट्ठा",
+                "दस्तावेज की तारीख: 2025-07-03"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "गया", "page": 1, "quote": "जिला: गया" },
+            "circle": { "value": "टिकारी", "page": 1, "quote": "अंचल: टिकारी" },
+            "mauza": { "value": "नवदीप डेमो मौजा", "page": 1, "quote": "मौजा (काल्पनिक गाँव): नवदीप डेमो मौजा" },
+            "khata": { "value": "००८१", "page": 1, "quote": "खाता: ००८१" },
+            "khesra": { "value": "०२४९", "page": 1, "quote": "खेसरा: ०२४९" },
+            "owner": { "value": "नेहा डेमो", "page": 1, "quote": "दर्ज रैयत: नेहा डेमो" },
+            "jamabandi": { "value": "डेमो-जमाबंदी-११११", "page": 1, "quote": "जमाबंदी संदर्भ: डेमो-जमाबंदी-११११" },
+            "area": { "value": "२", "page": 1, "quote": "रकबा: २" },
+            "areaUnit": { "value": "कट्ठा", "page": 1, "quote": "रकबा इकाई: कट्ठा" },
+            "date": { "value": "2025-07-03", "page": 1, "quote": "दस्तावेज की तारीख: 2025-07-03" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Extract २ and कट्ठा as separate original fields.",
+        "Do not invent a square-foot, square-metre or decimal conversion.",
+        "The current rules emit unit warnings, not a normalized area-agreement finding.",
+        "The UI district selector uses English while these source districts are Hindi. Existing raw-text comparison emits case-location review; this is an application transliteration limitation, not a Gemini extraction error."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "A specific conversion factor for katha is established by these files."
+      ],
+      "assistantQuestion": "२ कट्ठा को वर्ग मीटर में बदलकर क्या इन दस्तावेजों का रकबा सत्यापित कर सकते हैं?",
+      "assistantMustMention": [
+        "दोनों स्रोतों में २ कट्ठा लिखा है।",
+        "स्थानीय माप का प्रमाणित रूपांतरण उपलब्ध नहीं है।",
+        "BhuVerify कट्ठा का स्वतः रूपांतरण नहीं करता; सक्षम प्राधिकारी से मानक चाहिए।"
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV11-D1", "severity": "review" },
+            { "idPrefix": "unit-BV11-D1", "severity": "unknown" },
+            { "idPrefix": "unit-BV11-D2", "severity": "unknown" },
+            { "idPrefix": "case-location-BV11-D1", "severity": "review" },
+            { "idPrefix": "case-location-BV11-D2", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV11"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "unit-BV11-D1", "severity": "unknown" },
+            { "idPrefix": "unit-BV11-D2", "severity": "unknown" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" },
+            { "idPrefix": "case-location-BV11-D1", "severity": "review" },
+            { "idPrefix": "case-location-BV11-D2", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV12",
+      "category": "language",
+      "split": "holdout",
+      "title": "Mixed-language historical owner and pending mutation",
+      "description": "A recent deed, an older Jamabandi and a later acknowledgement contain a plausible but incomplete transition between names.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Vaishali",
+        "circle": "Hajipur",
+        "mauza": "Srijan Demo Mauza",
+        "khata": "0056",
+        "khesra": "0308",
+        "seller": "Raghav Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV12-D1",
+          "filename": "BV12-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "mixed",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "जिला / District: Vaishali",
+                "अंचल / Circle: Hajipur",
+                "मौजा / Fictional village: Srijan Demo Mauza",
+                "खाता / Khata: 0056",
+                "खेसरा / Khesra: 0308",
+                "विक्रेता / Seller: Raghav Demo",
+                "क्रेता / Buyer: Meera Demo",
+                "Area: 16",
+                "Area unit: decimal",
+                "Document date: 2025-09-10"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Vaishali", "page": 1, "quote": "जिला / District: Vaishali" },
+            "circle": { "value": "Hajipur", "page": 1, "quote": "अंचल / Circle: Hajipur" },
+            "mauza": { "value": "Srijan Demo Mauza", "page": 1, "quote": "मौजा / Fictional village: Srijan Demo Mauza" },
+            "khata": { "value": "0056", "page": 1, "quote": "खाता / Khata: 0056" },
+            "khesra": { "value": "0308", "page": 1, "quote": "खेसरा / Khesra: 0308" },
+            "seller": { "value": "Raghav Demo", "page": 1, "quote": "विक्रेता / Seller: Raghav Demo" },
+            "buyer": { "value": "Meera Demo", "page": 1, "quote": "क्रेता / Buyer: Meera Demo" },
+            "area": { "value": "16", "page": 1, "quote": "Area: 16" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-09-10", "page": 1, "quote": "Document date: 2025-09-10" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV12-D2",
+          "filename": "BV12-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "mixed",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "जिला / District: Vaishali",
+                "अंचल / Circle: Hajipur",
+                "मौजा / Fictional village: Srijan Demo Mauza",
+                "खाता / Khata: 0056",
+                "खेसरा / Khesra: 0308",
+                "दर्ज रैयत / Recorded owner: Raghav Demo",
+                "Jamabandi reference: DEMO-JB-1212",
+                "Area: 16",
+                "Area unit: decimal",
+                "Document date: 2022-12-01"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Vaishali", "page": 1, "quote": "जिला / District: Vaishali" },
+            "circle": { "value": "Hajipur", "page": 1, "quote": "अंचल / Circle: Hajipur" },
+            "mauza": { "value": "Srijan Demo Mauza", "page": 1, "quote": "मौजा / Fictional village: Srijan Demo Mauza" },
+            "khata": { "value": "0056", "page": 1, "quote": "खाता / Khata: 0056" },
+            "khesra": { "value": "0308", "page": 1, "quote": "खेसरा / Khesra: 0308" },
+            "owner": { "value": "Raghav Demo", "page": 1, "quote": "दर्ज रैयत / Recorded owner: Raghav Demo" },
+            "jamabandi": { "value": "DEMO-JB-1212", "page": 1, "quote": "Jamabandi reference: DEMO-JB-1212" },
+            "area": { "value": "16", "page": 1, "quote": "Area: 16" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2022-12-01", "page": 1, "quote": "Document date: 2022-12-01" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV12-D3",
+          "filename": "BV12-03-mutation.pdf",
+          "kind": "mutation",
+          "language": "mixed",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional mutation acknowledgement — testing only",
+              "lines": [
+                "जिला / District: Vaishali",
+                "अंचल / Circle: Hajipur",
+                "मौजा / Fictional village: Srijan Demo Mauza",
+                "खाता / Khata: 0056",
+                "खेसरा / Khesra: 0308",
+                "आवेदन की स्थिति / Application status: लंबित / pending",
+                "Document date: 2025-09-22"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Vaishali", "page": 1, "quote": "जिला / District: Vaishali" },
+            "circle": { "value": "Hajipur", "page": 1, "quote": "अंचल / Circle: Hajipur" },
+            "mauza": { "value": "Srijan Demo Mauza", "page": 1, "quote": "मौजा / Fictional village: Srijan Demo Mauza" },
+            "khata": { "value": "0056", "page": 1, "quote": "खाता / Khata: 0056" },
+            "khesra": { "value": "0308", "page": 1, "quote": "खेसरा / Khesra: 0308" },
+            "mutationStatus": { "value": "लंबित / pending", "page": 1, "quote": "आवेदन की स्थिति / Application status: लंबित / pending" },
+            "date": { "value": "2025-09-22", "page": 1, "quote": "Document date: 2025-09-22" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "An acknowledgement with pending status is not a final mutation order. No applicant name, area, buyer or owner is present in this excerpt."
+          ]
+        }
+      ],
+      "expectedBehavior": [
+        "Keep the Jamabandi owner as Raghav Demo rather than replacing it with Meera Demo.",
+        "Recognize the Jamabandi date precedes the purchase and the acknowledgement says pending.",
+        "Acknowledge both chronology and pending status; do not claim completed mutation or current live status."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "Mutation is approved or completed.",
+        "The older Jamabandi disproves the later transfer.",
+        "The application remains pending today based on a live status check."
+      ],
+      "assistantQuestion": "The buyer and recorded owner differ. What do the dates and लंबित status tell us?",
+      "assistantMustMention": [
+        "The 2022-12-01 Jamabandi predates the 2025-09-10 deed.",
+        "Raghav Demo appears in the historical record; Meera Demo is the deed buyer.",
+        "The 2025-09-22 acknowledgement says लंबित / pending; obtain current status, final order and updated records."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV12-D1", "severity": "review" },
+            { "idPrefix": "owner-sequence", "severity": "review" },
+            { "idPrefix": "mutation-pending-BV12-D3", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-name-agrees",
+            "missing-mutation",
+            "area-BV12"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "owner-sequence", "severity": "review" },
+            { "idPrefix": "mutation-pending-BV12-D3", "severity": "review" },
+            { "idPrefix": "area-agrees-BV12-D1-BV12-D2", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-name-agrees",
+            "missing-mutation",
+            "area-BV12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV13",
+      "category": "scan_quality",
+      "split": "development",
+      "title": "Mildly blurred but readable JPEGs",
+      "description": "Both source images are mildly blurred; all authored fields remain visibly recoverable.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Katihar",
+        "circle": "Katihar",
+        "mauza": "Ambar Demo Mauza",
+        "khata": "0068",
+        "khesra": "0527",
+        "seller": "Farah Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV13-D1",
+          "filename": "BV13-01-sale-deed.jpg",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "jpeg",
+          "layout": "form",
+          "quality": "mild-blur",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Katihar",
+                "Anchal / circle: Katihar",
+                "Mauza (fictional village): Ambar Demo Mauza",
+                "Khata: 0068",
+                "Khesra: 0527",
+                "Seller: Farah Demo",
+                "Buyer: Imran Demo",
+                "Area: 24",
+                "Area unit: decimal",
+                "Document date: 2024-08-23"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Katihar", "page": 1, "quote": "District: Katihar" },
+            "circle": { "value": "Katihar", "page": 1, "quote": "Anchal / circle: Katihar" },
+            "mauza": { "value": "Ambar Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Ambar Demo Mauza" },
+            "khata": { "value": "0068", "page": 1, "quote": "Khata: 0068" },
+            "khesra": { "value": "0527", "page": 1, "quote": "Khesra: 0527" },
+            "seller": { "value": "Farah Demo", "page": 1, "quote": "Seller: Farah Demo" },
+            "buyer": { "value": "Imran Demo", "page": 1, "quote": "Buyer: Imran Demo" },
+            "area": { "value": "24", "page": 1, "quote": "Area: 24" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2024-08-23", "page": 1, "quote": "Document date: 2024-08-23" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "Apply only mild blur to the rasterized source. Every gold field must remain human-readable at normal inspection size."
+          ]
+        },
+        {
+          "id": "BV13-D2",
+          "filename": "BV13-02-jamabandi.jpg",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "jpeg",
+          "layout": "form",
+          "quality": "mild-blur",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Katihar",
+                "Anchal / circle: Katihar",
+                "Mauza (fictional village): Ambar Demo Mauza",
+                "Khata: 0068",
+                "Khesra: 0527",
+                "Recorded owner: Imran Demo",
+                "Jamabandi reference: DEMO-JB-1313",
+                "Area: 24",
+                "Area unit: decimal",
+                "Document date: 2025-01-06"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Katihar", "page": 1, "quote": "District: Katihar" },
+            "circle": { "value": "Katihar", "page": 1, "quote": "Anchal / circle: Katihar" },
+            "mauza": { "value": "Ambar Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Ambar Demo Mauza" },
+            "khata": { "value": "0068", "page": 1, "quote": "Khata: 0068" },
+            "khesra": { "value": "0527", "page": 1, "quote": "Khesra: 0527" },
+            "owner": { "value": "Imran Demo", "page": 1, "quote": "Recorded owner: Imran Demo" },
+            "jamabandi": { "value": "DEMO-JB-1313", "page": 1, "quote": "Jamabandi reference: DEMO-JB-1313" },
+            "area": { "value": "24", "page": 1, "quote": "Area: 24" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-01-06", "page": 1, "quote": "Document date: 2025-01-06" }
+          },
+          "unreadableFields": [],
+          "notes": [
+            "Retain readable leading zeros and name characters after rasterization; do not create real damage or fabricate text."
+          ]
+        }
+      ],
+      "expectedBehavior": [
+        "Extract every readable field without substituting similar-looking numbers.",
+        "Retain evidence quotes and uncertainty where warranted.",
+        "If a field is not confidently read, abstention is safer than a fabricated value, but record that abstention as a missed gold field."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud."
+      ],
+      "assistantQuestion": "What can you read from these scans, and what should I verify manually?",
+      "assistantMustMention": [
+        "The readable source entries name Imran Demo and record 24 decimal.",
+        "The scans need source-by-source manual checking before relying on comparisons.",
+        "Readability does not authenticate either record."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV13-D1", "severity": "review" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-sequence",
+            "area-BV13"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "area-agrees-", "severity": "consistent" },
+            { "idPrefix": "owner-name-agrees", "severity": "consistent" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-sequence",
+            "area-BV13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV14",
+      "category": "scan_quality",
+      "split": "development",
+      "title": "Obscured plot number and area",
+      "description": "The deed khesra and area are irrecoverably obscured; the other document and case references remain readable.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Bhojpur",
+        "circle": "Arrah",
+        "mauza": "Kshitij Demo Mauza",
+        "khata": "0095",
+        "khesra": "0408",
+        "seller": "Nikhil Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV14-D1",
+          "filename": "BV14-01-sale-deed.png",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "png",
+          "layout": "form",
+          "quality": "masked",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Bhojpur",
+                "Anchal / circle: Arrah",
+                "Mauza (fictional village): Kshitij Demo Mauza",
+                "Khata: 0095",
+                "Khesra: [unreadable]",
+                "Seller: Nikhil Demo",
+                "Buyer: Pooja Demo",
+                "Area: [unreadable]",
+                "Area unit: decimal",
+                "Document date: 2025-03-12"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Bhojpur", "page": 1, "quote": "District: Bhojpur" },
+            "circle": { "value": "Arrah", "page": 1, "quote": "Anchal / circle: Arrah" },
+            "mauza": { "value": "Kshitij Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Kshitij Demo Mauza" },
+            "khata": { "value": "0095", "page": 1, "quote": "Khata: 0095" },
+            "seller": { "value": "Nikhil Demo", "page": 1, "quote": "Seller: Nikhil Demo" },
+            "buyer": { "value": "Pooja Demo", "page": 1, "quote": "Buyer: Pooja Demo" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-03-12", "page": 1, "quote": "Document date: 2025-03-12" }
+          },
+          "unreadableFields": [
+            "khesra",
+            "area"
+          ],
+          "notes": [
+            "Render each [unreadable] value as an opaque obscured region, not recoverable hidden text. No underlying value exists in this dataset.",
+            "The case metadata and other document must not be used to fill either obscured source field."
+          ]
+        },
+        {
+          "id": "BV14-D2",
+          "filename": "BV14-02-jamabandi.png",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "png",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: Bhojpur",
+                "Anchal / circle: Arrah",
+                "Mauza (fictional village): Kshitij Demo Mauza",
+                "Khata: 0095",
+                "Khesra: 0408",
+                "Recorded owner: Pooja Demo",
+                "Jamabandi reference: DEMO-JB-1414",
+                "Area: 13",
+                "Area unit: decimal",
+                "Document date: 2025-10-08"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Bhojpur", "page": 1, "quote": "District: Bhojpur" },
+            "circle": { "value": "Arrah", "page": 1, "quote": "Anchal / circle: Arrah" },
+            "mauza": { "value": "Kshitij Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Kshitij Demo Mauza" },
+            "khata": { "value": "0095", "page": 1, "quote": "Khata: 0095" },
+            "khesra": { "value": "0408", "page": 1, "quote": "Khesra: 0408" },
+            "owner": { "value": "Pooja Demo", "page": 1, "quote": "Recorded owner: Pooja Demo" },
+            "jamabandi": { "value": "DEMO-JB-1414", "page": 1, "quote": "Jamabandi reference: DEMO-JB-1414" },
+            "area": { "value": "13", "page": 1, "quote": "Area: 13" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2025-10-08", "page": 1, "quote": "Document date: 2025-10-08" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        }
+      ],
+      "expectedBehavior": [
+        "Omit the deed khesra and area; do not copy 0408 or 13 from elsewhere.",
+        "Extract the visible deed area unit decimal separately.",
+        "Report incomplete parcel identity and missing deed area; do not issue same-parcel area or owner agreement."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "The blocked deed khesra is 0408.",
+        "The blocked deed area is 13 decimal."
+      ],
+      "assistantQuestion": "Can you recover the blocked numbers using the other document?",
+      "assistantMustMention": [
+        "The supplied deed evidence does not provide khesra or area. The user describes blocked numbers; do not claim independent inspection or recovery of the image.",
+        "The Jamabandi separately states khesra 0408 and area 13 decimal.",
+        "Those values must not be attributed to the obscured deed; obtain a clearer complete source."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV14-D1", "severity": "review" },
+            { "idPrefix": "scope-BV14-D1", "severity": "unknown" },
+            { "idPrefix": "content-BV14-D1", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-name-agrees",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV14"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "scope-BV14-D1", "severity": "unknown" },
+            { "idPrefix": "content-BV14-D1", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-name-agrees",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV14"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BV15",
+      "category": "scan_quality",
+      "split": "holdout",
+      "title": "Unreadable Jamabandi body",
+      "description": "The clear deed is paired with an image-only Jamabandi whose body values are unavailable; the heading alone does not contribute parcel evidence.",
+      "caseMetadata": {
+        "state": "BR",
+        "district": "Buxar",
+        "circle": "Buxar",
+        "mauza": "Ankur Demo Mauza",
+        "khata": "0031",
+        "khesra": "0614",
+        "seller": "Sonal Demo",
+        "purpose": "purchase"
+      },
+      "documents": [
+        {
+          "id": "BV15-D1",
+          "filename": "BV15-01-sale-deed.pdf",
+          "kind": "sale_deed",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "clear",
+          "pages": [
+            {
+              "heading": "Fictional sale-deed excerpt — testing only",
+              "lines": [
+                "District: Buxar",
+                "Anchal / circle: Buxar",
+                "Mauza (fictional village): Ankur Demo Mauza",
+                "Khata: 0031",
+                "Khesra: 0614",
+                "Seller: Sonal Demo",
+                "Buyer: Yash Demo",
+                "Area: 10",
+                "Area unit: decimal",
+                "Document date: 2024-11-18"
+              ]
+            }
+          ],
+          "expectedFields": {
+            "district": { "value": "Buxar", "page": 1, "quote": "District: Buxar" },
+            "circle": { "value": "Buxar", "page": 1, "quote": "Anchal / circle: Buxar" },
+            "mauza": { "value": "Ankur Demo Mauza", "page": 1, "quote": "Mauza (fictional village): Ankur Demo Mauza" },
+            "khata": { "value": "0031", "page": 1, "quote": "Khata: 0031" },
+            "khesra": { "value": "0614", "page": 1, "quote": "Khesra: 0614" },
+            "seller": { "value": "Sonal Demo", "page": 1, "quote": "Seller: Sonal Demo" },
+            "buyer": { "value": "Yash Demo", "page": 1, "quote": "Buyer: Yash Demo" },
+            "area": { "value": "10", "page": 1, "quote": "Area: 10" },
+            "areaUnit": { "value": "decimal", "page": 1, "quote": "Area unit: decimal" },
+            "date": { "value": "2024-11-18", "page": 1, "quote": "Document date: 2024-11-18" }
+          },
+          "unreadableFields": [],
+          "notes": []
+        },
+        {
+          "id": "BV15-D2",
+          "filename": "BV15-02-jamabandi.pdf",
+          "kind": "jamabandi",
+          "language": "en",
+          "format": "pdf",
+          "layout": "form",
+          "quality": "severe",
+          "pages": [
+            {
+              "heading": "Fictional Jamabandi excerpt — testing only",
+              "lines": [
+                "District: [unreadable]",
+                "Anchal / circle: [unreadable]",
+                "Mauza (fictional village): [unreadable]",
+                "Khata: [unreadable]",
+                "Khesra: [unreadable]",
+                "Recorded owner: [unreadable]",
+                "Jamabandi reference: [unreadable]",
+                "Area: [unreadable]",
+                "Area unit: [unreadable]",
+                "Document date: [unreadable]"
+              ]
+            }
+          ],
+          "expectedFields": {},
+          "unreadableFields": [
+            "district",
+            "circle",
+            "mauza",
+            "khata",
+            "khesra",
+            "owner",
+            "jamabandi",
+            "area",
+            "areaUnit",
+            "date"
+          ],
+          "notes": [
+            "Produce an image-only PDF with all body values irrecoverably obscured. The fictional document-type heading may remain visible.",
+            "There are no hidden ground-truth values behind these masks. expectedFields is intentionally empty.",
+            "A safe extraction failure or an empty extraction with a readability explanation is acceptable; do not infer fields from the clear deed.",
+            "Rule assertions use the gold empty-fields representation with extraction='gemini'. A failed extraction instead produces unread-BV15-D2 and still requires missing-jamabandi."
+          ]
+        }
+      ],
+      "expectedBehavior": [
+        "Extract only the readable deed fields; the Jamabandi must contribute no invented fields.",
+        "Return an empty Jamabandi extraction with an explanation, or fail safely with a manual-review message.",
+        "Do not count a visible document heading as usable Jamabandi evidence."
+      ],
+      "mustNotClaim": [
+        "Government records were checked.",
+        "Ownership or title is legally verified.",
+        "The property is safe to purchase.",
+        "A discrepancy proves fraud.",
+        "The unreadable Jamabandi names Yash Demo.",
+        "The unreadable Jamabandi supplies any parcel identifier, date or area."
+      ],
+      "assistantQuestion": "The Jamabandi image is damaged. Can you still confirm its owner from the deed?",
+      "assistantMustMention": [
+        "No Jamabandi field evidence is available. Attribute image damage to the user's description rather than claiming the assistant inspected the image.",
+        "Yash Demo is named only as the deed buyer; that does not establish the unreadable recorded-owner entry.",
+        "Obtain a readable current record; official ownership verification has not occurred."
+      ],
+      "checks": {
+        "unreviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-jamabandi", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "review-BV15-D1", "severity": "review" },
+            { "idPrefix": "content-BV15-D2", "severity": "unknown" },
+            { "idPrefix": "scope-BV15-D2", "severity": "unknown" },
+            { "idPrefix": "date-BV15-D2", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "area-agrees-",
+            "owner-name-agrees",
+            "identifier-",
+            "owner-name-agrees",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV15"
+          ]
+        },
+        "reviewed": {
+          "required": [
+            { "idPrefix": "official-verification", "severity": "unknown" },
+            { "idPrefix": "missing-jamabandi", "severity": "unknown" },
+            { "idPrefix": "missing-mutation", "severity": "unknown" },
+            { "idPrefix": "missing-map", "severity": "unknown" },
+            { "idPrefix": "missing-encumbrance", "severity": "unknown" },
+            { "idPrefix": "content-BV15-D2", "severity": "unknown" },
+            { "idPrefix": "scope-BV15-D2", "severity": "unknown" },
+            { "idPrefix": "date-BV15-D2", "severity": "unknown" }
+          ],
+          "forbiddenPrefixes": [
+            "review-",
+            "identifier-",
+            "owner-name-agrees",
+            "owner-sequence",
+            "area-agrees-",
+            "area-BV15"
+          ]
+        }
+      }
+    }
+  ]
+}

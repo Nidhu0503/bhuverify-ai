@@ -1,0 +1,8 @@
+{
+  "name": "BhuVerify AI Prototype",
+  "description": "No-login Bihar document comparison prototype with browser-saved cases and server-side Gemini. Extraction live-tested; live case Q&A remains unverified after provider service errors. No Firebase or official-record verification.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

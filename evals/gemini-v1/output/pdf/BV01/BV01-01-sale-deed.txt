@@ -1,0 +1,18 @@
+FICTIONAL TEST DOCUMENT - NOT A GOVERNMENT RECORD
+काल्पनिक परीक्षण दस्तावेज़ - सरकारी रिकॉर्ड नहीं
+BhuVerify offline fixture BV01-D1
+
+Fictional sale-deed excerpt - testing only
+
+District: Patna
+Anchal / circle: Danapur
+Mauza (fictional village): Kalpana Demo Mauza
+Khata: 0018
+Khesra: 0042
+For this fictional transfer, the seller is Asha Demo.
+The buyer named in this fictional transfer is Ravi Demo.
+The transferred area is 8.
+The area unit written in this excerpt is decimal.
+The fictional transfer date is 2024-02-12.
+
+Fictional names and invented parcel data. No legal validity. No official verification.

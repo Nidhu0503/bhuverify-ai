@@ -1,0 +1,157 @@
+BHUVERIFY - OFFLINE GEMINI EVALUATION PACK v1
+Prepared 9 October 2026 | Bihar first | All records fictional
+
+START HERE
+1. Open outputs/bihar-v1/expected-answers.xlsx in Excel or another XLSX reader.
+2. Open output/pdf/BV01/. Read the two TXT documents and find BV01 in the
+   workbook. This is the simplest example. No API key or running app is needed.
+3. Browse the remaining folders. There are 15 cases and 30 uploadable files.
+   The directory is named output/pdf for packaging; it also contains TXT,
+   PNG and JPG fixtures. Upload ONLY those document files when testing later.
+4. Do not upload this guide, dataset.json or the answer workbook to Gemini.
+   They are reviewer materials, not inputs to the model.
+
+WHAT IS READY NOW
+- 22 PDFs, 4 PNGs, 2 JPGs, 2 TXT files, each below the app's 10 MB limit.
+- 282 expected visible field values, with source quotes and page numbers.
+- 198 expected omissions across 16 supported fields per document: 480
+  field decisions in total. Missing and unreadable values must not be invented.
+- Expected document-check behavior before and after human source review.
+- One assistant question and a grounded-answer rubric for each case.
+- All model results are blank/Not run. No Gemini call has been made.
+
+CASES
+BV01  Matching English TXT documents; exact leading zeros.
+BV02  Matching two-page PDFs; plot information on page 2.
+BV03  Matching area in acre versus decimal. HOLDOUT.
+BV04  Different Khesra numbers; do not silently merge parcels.
+BV05  Different areas in the same unit; review the discrepancy.
+BV06  Later recorded owner differs from deed buyer. HOLDOUT.
+BV07  Area unit missing from one document; no unit guessing.
+BV08  Buyer and recorded-owner information missing; no name guessing.
+BV09  Deed only; Jamabandi and other evidence absent. HOLDOUT.
+BV10  Hindi PDF; Devanagari digits and leading zeros.
+BV11  Hindi image; local unit kattha must not be converted.
+BV12  Mixed-language records, old owner, pending mutation. HOLDOUT.
+BV13  Mildly blurred JPGs with still-readable facts.
+BV14  Masked plot number and area; matching companion is NOT evidence
+      for filling the masked document's fields.
+BV15  One readable deed and one image-only PDF with an obscured body.
+      Empty extraction or an explicit safe failure is acceptable. HOLDOUT.
+
+CASE SETUP FOR A LATER UI RUN
+Use the Case guide sheet for district, circle, mauza, khata, khesra and seller.
+Create a NEW property case, prefix its name with FICTIONAL EVAL and the case ID,
+and select Review before a purchase. Do not use the app's prefilled demo case.
+Upload each file under its specified kind: sale deed, Jamabandi, or mutation.
+Documents are synthetic excerpts, not replicas of official Bihar forms.
+
+The English district dropdown and original Hindi extraction may trigger
+case-location warnings for BV10/BV11. This is the current rule engine's lack of
+transliteration matching, not an extraction error. Keep the Hindi source text;
+do not translate it to improve a score. The answer key records this limitation.
+
+HOW TO SCORE LATER - KEEP THREE STAGES SEPARATE
+A. Extraction: save the original AI fields, notes, source quotes, page numbers,
+   confidence and any error BEFORE editing fields in the UI. Map the app's
+   generated document IDs to the fixture IDs using filenames. Score the Fields
+   sheet from this original output, not the corrected version.
+B. Checks: first capture unreviewed findings. Then review against source pages
+   and save corrections, recording every edit. Capture reviewed findings too.
+   dataset.json rule assertions use gold values with high confidence, and
+   distinguish reviewed=false/true. Actual low-confidence or missing AI fields
+   can legitimately change findings; attribute the difference to the right stage.
+C. Assistant: ask the supplied question. Save its exact answer and citations.
+   Say whether it saw RAW or HUMAN-CORRECTED evidence. Check every factual claim
+   against the cited document/page/quote, not just that a source ID exists.
+   For the first pilot, use raw evidence; never silently substitute corrected
+   evidence. A later corrected-evidence run is a separate diagnostic run.
+   The expected assistant facts assume gold evidence is available. If extraction
+   missed a fact, an assistant that correctly says it is unavailable is grounded;
+   record the end-to-end miss under extraction, not as assistant invention.
+   The assistant receives fields and findings, not the original uploaded images
+   or extraction notes. For BV14/BV15 accept 'missing/not extracted/unavailable';
+   it may attribute damage to the user's question, but must not claim it inspected
+   the image itself.
+
+VALUE AND EVIDENCE RULES
+- Preserve names, script, identifiers and leading zeros exactly; trim only
+  incidental surrounding whitespace. Do not rewrite Hindi digits as English
+  digits for extraction scoring. The rule engine may normalize them separately.
+- Keep source units exactly. The rule engine can compare configured global
+  units, but extraction must not convert local units or infer a missing unit.
+- Keep explicitly printed seller, buyer and recorded owner separate.
+- An absent field must be omitted, not filled from the case form, another file,
+  a previous run, or general knowledge. Never infer 'no mortgage' from silence.
+- The gold quote is one valid example, not the only permitted excerpt. Accept
+  another short verbatim excerpt from the same correct page that supports the
+  value. Harmless line-wrap/whitespace differences are acceptable; fabricated
+  supporting text, incorrect pages and unsupported values are not.
+- TXT and image fixtures have page 1; BV02 deliberately tests page 2.
+- Score value correctness separately from citation/evidence correctness.
+- Low confidence does not make a wrong value correct. Flag confidently wrong
+  answers separately. Do not force the model to claim high confidence.
+- For fields marked Omit, a correctly omitted value is safe abstention. If the
+  provider times out or the API fails, do NOT award omission credit: no model
+  decision was observed. Log the error and leave unobserved fields unscored.
+- BV15's obscured document can safely return no fields and an unreadable note,
+  or an explicit extraction failure. The former has field decisions to score;
+  the latter counts as safe handling but not as successful field extraction.
+
+RUN RECORDS AND METRICS
+Make a fresh copy of the workbook for each run. Record date, reviewer, app
+commit, exact model/config, prompt version, document hashes, latency, errors,
+and where the raw output was saved. Never record an API key or access token.
+Keep raw results in ignored runs/<run-id>/, outside committed fixtures.
+Record first-attempt results and retries separately; never keep only the best.
+
+Report counts and coverage beside every percentage. Relevant measures:
+- Expected-value correctness: correct / all scored expected-value fields.
+- Safe abstention: correctly omitted / all scored expected omissions.
+- Evidence accuracy: supported quote AND correct page / scored evidence.
+- Invented-field count, unsupported legal-claim count, case completion and
+  API-error counts. Do not hide failures by excluding them from the run log.
+The workbook is a human scoring aid, not an automatic accuracy certification.
+Never treat all Not run cells, all omissions, or corrected results as success.
+
+CONTROLLED PILOT - FUTURE STEP, NOT STARTED
+Begin with BV01, BV04, BV10 and BV14: 8 document extractions. If assistant
+questions are included, that adds 4 requests. This is a request plan, not a
+price estimate or promise of free usage. Confirm local key setup, chosen model,
+provider billing/quota and budget before enabling it. Do not paste keys in chat.
+Pause on unexpected spend, provider errors, fabricated facts or unsafe claims.
+
+Use the 10 development cases for debugging. Keep BV03/BV06/BV09/BV12/BV15
+reserved until code, prompt and scoring rules are frozen. They are held out from
+tuning, not secret: this is a small fixture pack. After inspecting holdout errors
+and making changes, create a fresh holdout set before claiming a new blind score.
+
+BOUNDARIES
+Matching fields do NOT establish ownership, clear title, authenticity, absence
+of fraud or that land is safe to buy. Missing evidence means unknown. Pending
+mutation and an older recorded owner need context, not a fraud label. Official
+verification always remains not_performed in this evaluation.
+
+This is an initial synthetic smoke-test suite, not representative validation on
+real deeds or legal evidence. Clean layouts, conspicuous fictional banners and
+synthetic degradation differ from real scans. It does not cover handwriting,
+all Bihar document formats, prompt injection, multi-plot deeds, security, or
+other states. Expand those separately after the controlled pilot.
+
+OFFLINE REPRODUCTION (OPTIONAL - FILES ARE ALREADY BUILT)
+From the BhuVerify repository root:
+  node --experimental-strip-types --experimental-default-type=module evals/gemini-v1/validate-dataset.ts
+  node evals/gemini-v1/build-documents.mjs
+  python3 evals/gemini-v1/verify-documents.py
+
+The document builder uses installed Playwright and Chrome, plus a local Hindi
+font; it blocks browser page requests and never loads .env files or calls APIs.
+Override EVAL_HINDI_FONT, PLAYWRIGHT_CHANNEL and EVAL_PYTHON if needed.
+The image-only PDF helper requires reportlab. Verification requires pypdf,
+Pillow and pdftoppm (or set PDFTOPPM to its binary path). No npm install is
+needed for this pack. The workbook builder uses the separate Codex artifact-tool
+runtime, not an added app dependency; see its comments for reproduction.
+
+Rebuilding changes generated-file hashes: regenerate manifest and recheck the
+workbook against the frozen dataset before a new evaluation version.
+No application code, dependencies, Git branches or commits were changed here.

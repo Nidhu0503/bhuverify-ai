@@ -1,0 +1,6 @@
+tmp/
+runs/
+.authoring/
+node_modules/
+*.zip
+__pycache__/

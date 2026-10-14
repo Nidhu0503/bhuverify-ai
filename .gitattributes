@@ -1,0 +1,6 @@
+# Preserve generated fictional fixtures and tutorial assets byte-for-byte.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.mp4 binary
+*.xlsx binary

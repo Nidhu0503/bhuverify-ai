@@ -1,0 +1,18 @@
+BHUVERIFY — FICTIONAL PRACTICE DOCUMENT
+NOT A GOVERNMENT DOCUMENT. NOT VALID FOR ANY TRANSACTION.
+
+Document type: Jamabandi (fictional)
+Owner: Asha Demo
+District: Patna
+Circle: Bihta
+Mauza: Demo Nagar (fictional)
+Khata: DEMO-42
+Khesra: DEMO-181
+Jamabandi: DEMO-2024-008
+Area: 10
+Area unit: decimal
+Date: 2026-08-10
+
+The plot number intentionally differs from fictional-sale-deed.txt.
+Use this only to practice extraction, manual field review and document comparison.
+This is synthetic evidence, not an official land record or ownership claim.

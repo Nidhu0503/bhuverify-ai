@@ -1,0 +1,119 @@
+/* Theme colours are presentation only. Never invert documents or video. */
+:root { color-scheme: light; }
+/* Change palettes atomically: fading a light card into dark briefly loses contrast. */
+.sample-card { transition: none; }
+
+@media screen {
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0d1815;
+    --white: #15251f;
+    --ink: #e8f2ec;
+    --muted: #b7c9c0;
+    --brand: #70ddb0;
+    --brand-dark: #a1eccb;
+    --line: #496455;
+    --control-line: #799486;
+    --surface-soft: #1c3329;
+    --focus: #a7c6ff;
+    --amber: #f1c26d;
+    --rose: #ffb3a3;
+    --shadow: 0 8px 30px #0002;
+    --on-action: #082319;
+    --attention-bg: #3c2520;
+    --attention-ink: #ffc7b9;
+    --review-bg: #342d1b;
+    --review-ink: #f7d68e;
+    --consistent-bg: #16372b;
+    --consistent-ink: #a1eccb;
+    --unknown-bg: #2c293b;
+    --unknown-ink: #ded2fa;
+  }
+
+  html[data-theme="dark"] ::selection { color: #f3fff9; background: #346c52; }
+  html[data-theme="dark"] :is(.sidebar, .topbar, .state-box, .stats > div, .search-box, .select-wrap, .case-card, .empty-cases, .sample-card, .property-strip, .panel, .review-counters > div, .finding, .assistant-panel, .document-row, .guidance-card, .service-card, .how-card, .auth-screen, .modal, .getting-started, .reading-preview) {
+    background: var(--white);
+    border-color: var(--line);
+  }
+  html[data-theme="dark"] :is(.sidebar-note, .verification-panel, .chat-message, .code-note, .modal-actions, .evidence-toolbar) {
+    background: var(--surface-soft);
+    border-color: var(--line);
+  }
+  html[data-theme="dark"] :is(.state-monogram, .avatar, .nav-count, .case-icon, .empty-icon, .sample-number, .review-summary-icon, .spark-icon, .doc-icon, .step-number, .service-icon, .settings-icon, .section-heading h2 > span) {
+    background: var(--surface-soft);
+    border-color: var(--line);
+    color: var(--brand-dark);
+  }
+  html[data-theme="dark"] :is(.sample-pill, .stat-state > span) { border-color: var(--line); color: var(--muted); }
+  html[data-theme="dark"] :is(.eyebrow, .chat-message p) { color: var(--muted); }
+  html[data-theme="dark"] :is(nav button:hover, .icon-button:hover, .sample-card:hover) { background: var(--surface-soft); }
+  html[data-theme="dark"] nav button.selected { background: var(--surface-soft); color: var(--brand-dark); outline-color: var(--control-line); }
+  html[data-theme="dark"] :is(.case-card:hover, .service-card:hover) { border-color: var(--brand); box-shadow: var(--shadow); }
+
+  html[data-theme="dark"] :is(.button.primary, .chat-input button, .brand-mark, .learn-primary-button, .reading-settings-done) {
+    color: var(--on-action);
+    background: var(--brand);
+    border-color: var(--brand);
+  }
+  html[data-theme="dark"] :is(.button.primary:hover, .learn-primary-button:hover:not(:disabled), .reading-settings-done:hover) { background: var(--brand-dark); color: var(--on-action); }
+  html[data-theme="dark"] .button.secondary { background: var(--white); color: var(--ink); border-color: var(--control-line); }
+  html[data-theme="dark"] .button.secondary:hover { background: var(--surface-soft); }
+  html[data-theme="dark"] .button.danger { background: var(--rose); color: #34130c; }
+  html[data-theme="dark"] .help-shortcut { background: var(--white); color: var(--ink); border-color: var(--control-line); }
+  html[data-theme="dark"] :is(.reading-settings-trigger, .reading-settings-close, .reading-settings-reset, .reading-settings-size-option, .theme-selector select) { border-color: var(--control-line); }
+
+  html[data-theme="dark"] :is(input, select, textarea) { color: var(--ink); background-color: var(--white); border-color: var(--control-line); }
+  html[data-theme="dark"] :is(input::placeholder, textarea::placeholder) { color: var(--muted); opacity: 1; }
+  html[data-theme="dark"] input:disabled { background-color: var(--surface-soft); color: var(--muted); }
+  html[data-theme="dark"] :is(.chat-input, .search-box, .select-wrap) { border-color: var(--control-line); }
+  html[data-theme="dark"] :is(.evidence-chips button, .quick-questions button, .chat-source, .upload-zone, .source-edit textarea) { background: var(--surface-soft); color: var(--ink); border-color: var(--control-line); }
+  html[data-theme="dark"] :is(.evidence-chips button:hover, .quick-questions button:hover, .upload-zone.dragging, .chat-message.user) { background: #234d39; color: var(--ink); border-color: var(--brand); }
+  html[data-theme="dark"] .inline-error { color: var(--attention-ink) !important; }
+  html[data-theme="dark"] .timeline-dot { background: var(--brand); box-shadow: 0 0 0 5px var(--bg); }
+  html[data-theme="dark"] .connection-dot { background: var(--amber); }
+  html[data-theme="dark"] .connection-dot.connected { background: var(--brand); }
+
+  /* Findings retain both their written labels and distinct semantic colours. */
+  html[data-theme="dark"] :is(.badge, .finding-icon) { color: var(--unknown-ink); background: var(--unknown-bg); border-color: var(--line); }
+  html[data-theme="dark"] :is(.badge.attention, .finding.attention .finding-icon) { color: var(--attention-ink); background: var(--attention-bg); }
+  html[data-theme="dark"] :is(.badge.review, .finding.review .finding-icon) { color: var(--review-ink); background: var(--review-bg); }
+  html[data-theme="dark"] :is(.badge.consistent, .finding.consistent .finding-icon) { color: var(--consistent-ink); background: var(--consistent-bg); }
+  html[data-theme="dark"] .badge.unknown { color: var(--unknown-ink); background: var(--unknown-bg); }
+  html[data-theme="dark"] .finding { border-left-color: var(--unknown-ink); }
+  html[data-theme="dark"] .finding.attention { border-left-color: var(--rose); }
+  html[data-theme="dark"] .finding.review { border-left-color: var(--amber); }
+  html[data-theme="dark"] .finding.consistent { border-left-color: var(--brand); }
+  html[data-theme="dark"] :is(.alert.info, .toast) { color: var(--consistent-ink); background: var(--consistent-bg); border: 1px solid var(--control-line); }
+  html[data-theme="dark"] .alert.warning { color: var(--review-ink); background: var(--review-bg); border-color: var(--amber); }
+  html[data-theme="dark"] .alert.error { color: var(--attention-ink); background: var(--attention-bg); border-color: var(--rose); }
+  html[data-theme="dark"] :is(.alert, .toast) svg { color: inherit; }
+
+  html[data-theme="dark"] .hero { background: #123c2c; border: 1px solid #48775e; box-shadow: none; }
+  html[data-theme="dark"] .hero :is(h2, p, small, .hero-label, .hero-guide-button) { color: #effff4; }
+  html[data-theme="dark"] .hero .button.light { color: #123323; background: #dff5e9; }
+  html[data-theme="dark"] .hero-guide-button:hover { background: #22553e; }
+  html[data-theme="dark"] .floating-document { background: var(--white); color: var(--ink); border: 1px solid var(--line); }
+  html[data-theme="dark"] .document-icon { background: var(--surface-soft); color: var(--brand-dark); }
+  html[data-theme="dark"] .learn-video { background: #09100d; }
+  html[data-theme="dark"] :is(.modal, .reading-settings-dialog)::backdrop { background: #000b; }
+  html[data-theme="dark"] .nav-scrim { background: #0009; }
+  html[data-theme="dark"] .skip-link { background: var(--white); color: var(--brand-dark); }
+
+  /* High contrast remains a separate preference, not a forced switch to light. */
+  html[data-theme="dark"][data-high-contrast="true"] {
+    --bg: #050b08; --white: #0c1711; --ink: #fff; --muted: #e2f0e7;
+    --brand: #9bffd0; --brand-dark: #baffdd; --line: #a3bead;
+    --control-line: #c7ddcf; --surface-soft: #12281b; --focus: #bed6ff;
+    --amber: #ffe2a0; --rose: #ffd0c5;
+  }
+  html[data-theme="dark"][data-high-contrast="true"] :is(.confidence, .extraction-label, .sample-pill, .tiny-label, .eyebrow, .form-note, .optional, .muted, .service-host, .sidebar-note > span, .profile span, .timeline time, .guidance-card ul) { color: var(--muted); }
+  html[data-theme="dark"][data-high-contrast="true"] :is(.sidebar-note, .verification-panel, .chat-message, .confidence) { background: var(--surface-soft); border-color: var(--line); }
+  html[data-theme="dark"][data-high-contrast="true"] .chat-message.user { background: #143a26; }
+  html[data-theme="dark"][data-high-contrast="true"] .badge.neutral { color: var(--unknown-ink); }
+  html[data-theme="dark"][data-high-contrast="true"] .learning-center { --learn-secondary: var(--ink); }
+  html[data-theme="dark"][data-high-contrast="true"] :is(.alert, .toast) { border-width: 2px; }
+}
+
+@media print {
+  :root { color-scheme: light; }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "bhuverify-ai-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev -p 3000 -H 0.0.0.0",
+    "dev:studio": "next dev --webpack -p 3000 -H 0.0.0.0",
+    "build": "next build --webpack",
+    "start": "node scripts/start.mjs",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test:browser": "node scripts/verify-prototype.mjs",
+    "test:api": "node scripts/verify-prototype-server.mjs",
+    "test:ui": "playwright test"
+  },
+  "dependencies": {
+    "@google/genai": "1.52.0",
+    "lucide-react": "0.468.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0",
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,16 @@
+export type DocumentKind = 'sale_deed' | 'jamabandi' | 'mutation' | 'lagaan' | 'map' | 'encumbrance' | 'other';
+export type EvidenceField = { value: string; page: number | null; quote: string; confidence: 'high' | 'medium' | 'low' };
+export type FieldName = 'owner' | 'seller' | 'buyer' | 'district' | 'circle' | 'mauza' | 'thana' | 'khata' | 'khesra' | 'jamabandi' | 'area' | 'areaUnit' | 'date' | 'mutationStatus' | 'mortgage' | 'boundaries';
+export type ExtractedFields = Partial<Record<FieldName, EvidenceField>>;
+export type AssistantSource = { id: number; documentId: string; documentName: string; field: FieldName; value: string; page: number | null; quote: string };
+export type AssistantAnswer = { answer: string; sources: AssistantSource[]; mode: 'gemini' | 'demo' };
+export type PropertyDocument = { id: string; name: string; kind: DocumentKind; mimeType: string; size: number; sha256: string; createdAt: string; extraction: 'demo' | 'gemini' | 'manual' | 'pending' | 'failed'; fields: ExtractedFields; notes: string[]; reviewed: boolean; storageKey?: string; originalAvailability?: 'stored' | 'not_retained' | 'sample'; error?: string };
+export type Finding = { id: string; severity: 'attention' | 'review' | 'unknown' | 'consistent'; title: string; detail: string; action: string; documentIds: string[]; field?: FieldName };
+export type Analysis = { createdAt: string; version: string; findings: Finding[]; summary: string; coverage: {present: number; expected: number}; officialVerification: 'not_performed' };
+export type PropertyCase = { id: string; ownerId: string; title: string; state: string; district: string; circle: string; mauza: string; khata: string; khesra: string; seller: string; purpose: 'purchase' | 'mutation' | 'records'; createdAt: string; updatedAt: string; demo: boolean; documents: PropertyDocument[]; analysis: Analysis | null };
+export type ServiceLink = { id: string; title: string; description: string; url: string; category: 'records' | 'mutation' | 'maps' | 'registration'; note?: string };
+export type StateAdapter = { code: string; name: string; nativeName: string; status: 'supported' | 'planned'; districts: string[]; services: ServiceLink[]; terminology: { parcel: string; holding: string; village: string }; lastChecked: string; guidance: { title: string; steps: string[]; serviceId: string }[] };
+/** No-login prototype: browser IndexedDB cases and optional server-side Gemini. */
+export type RuntimeConfig = { persistence: 'browser'; originalRetention: 'none'; aiEnabled: boolean; model: string; authRequired: false; firebase: null };
+export const DOCUMENT_LABELS: Record<DocumentKind,string> = {sale_deed:'Sale deed',jamabandi:'Jamabandi / RoR',mutation:'Mutation order',lagaan:'Lagaan receipt',map:'Plot map',encumbrance:'Mortgage / encumbrance',other:'Other document'};
+export const FIELD_LABELS: Record<FieldName,string> = {owner:'Recorded owner',seller:'Seller',buyer:'Buyer',district:'District',circle:'Anchal / circle',mauza:'Mauza / village',thana:'Thana number',khata:'Khata number',khesra:'Khesra / plot number',jamabandi:'Jamabandi number',area:'Area',areaUnit:'Area unit',date:'Document date',mutationStatus:'Mutation status',mortgage:'Mortgage entry',boundaries:'Boundaries'};

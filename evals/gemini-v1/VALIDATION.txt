@@ -1,0 +1,36 @@
+OFFLINE PACK VALIDATION - 9 OCTOBER 2026
+
+Application baseline: e6e2bba, branch chore/security-updates.
+No app code, dependency changes, commits, merges or API requests made.
+
+Fixture validation passed:
+- 15 cases, 30 documents, 5 categories, 10 development / 5 holdout.
+- 282 exact source-grounded expected field values.
+- 12 deliberately unreadable fields with no hidden correct source values.
+- 360 required/forbidden finding assertions against the real analyzeCase()
+  implementation, split between unreviewed and reviewed gold evidence.
+- Valid UI district choices, document kinds, fields, dates, source pages,
+  source quotes and fictional names.
+
+Binary and visual checks passed:
+- 22 PDFs, 4 PNGs, 2 JPEGs and 2 UTF-8 text files.
+- All 30 files below the app's 10 MB limit; hashes recorded in manifest.json.
+- PDF page counts match expectations, including both two-page BV02 files.
+- Every PDF page rendered with Poppler. Contact sheets reviewed for all
+  rendered PDF pages and images. Hindi and mild-blur examples reviewed at
+  full size. No unintended clipping or overlap observed.
+- Severely obscured BV15 Jamabandi is image-only, without extractable text.
+- Hindi shaping preserved by a locally embedded font and browser rendering.
+- A conspicuous fictional/not-government-record banner appears on each page.
+
+Spreadsheet checks passed:
+- Three worksheets: Run log, Fields, Case guide.
+- 480 field decisions: 282 expected values and 198 expected omissions.
+- All expected values match the dataset; leading-zero identifiers stay text.
+- Score formulas exercised with temporary sample decisions, then restored.
+- No formula errors; actual values and verdicts remain blank, cases Not run.
+- All worksheets rendered and visually reviewed, including Hindi and inputs.
+
+These checks verify this fixture pack, NOT Gemini accuracy, security, legal
+validity, live integrations or performance on real Bihar land records.
+No model extraction, assistant response, quota usage or billing was tested.

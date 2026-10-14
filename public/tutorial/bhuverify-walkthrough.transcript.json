@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "illustrated": true,
+  "duration": 82.66666666666667,
+  "scenes": [
+    {
+      "id": "welcome",
+      "title": {
+        "en": "A clearer first check",
+        "hi": "पहली जाँच, अधिक स्पष्टता से"
+      },
+      "narration": {
+        "en": "Welcome to BhuVerify, a reading aid for property documents. These illustrations use fictional records. No official verification is performed.",
+        "hi": "BhuVerify में आपका स्वागत है। यह संपत्ति के दस्तावेज़ समझने में मदद करता है। इन चित्रों में काल्पनिक रिकॉर्ड हैं। कोई आधिकारिक सत्यापन नहीं किया जाता।"
+      },
+      "start": 0,
+      "end": 9.625,
+      "segments": [
+        {
+          "en": "Welcome to BhuVerify, a reading aid for property documents.",
+          "hi": "BhuVerify में आपका स्वागत है। यह संपत्ति के दस्तावेज़ समझने में मदद करता है।",
+          "start": 0,
+          "end": 4.053741
+        },
+        {
+          "en": "These illustrations use fictional records. No official verification is performed.",
+          "hi": "इन चित्रों में काल्पनिक रिकॉर्ड हैं। कोई आधिकारिक सत्यापन नहीं किया जाता।",
+          "start": 4.375,
+          "end": 9.295862
+        }
+      ]
+    },
+    {
+      "id": "start",
+      "title": {
+        "en": "Start with a case",
+        "hi": "एक केस से शुरू करें"
+      },
+      "narration": {
+        "en": "Choose Explore a sample case to learn safely. Or choose New property case to begin with your own document.",
+        "hi": "सुरक्षित अभ्यास के लिए Explore a sample case चुनें। या अपने दस्तावेज़ से शुरू करने के लिए New property case चुनें।"
+      },
+      "start": 9.625,
+      "end": 16.041666666666664,
+      "segments": [
+        {
+          "en": "Choose Explore a sample case to learn safely.",
+          "hi": "सुरक्षित अभ्यास के लिए Explore a sample case चुनें।",
+          "start": 9.625,
+          "end": 12.212075
+        },
+        {
+          "en": "Or choose New property case to begin with your own document.",
+          "hi": "या अपने दस्तावेज़ से शुरू करने के लिए New property case चुनें।",
+          "start": 12.541666666666666,
+          "end": 15.715226666666666
+        }
+      ]
+    },
+    {
+      "id": "document",
+      "title": {
+        "en": "Add a document",
+        "hi": "दस्तावेज़ जोड़ें"
+      },
+      "narration": {
+        "en": "Choose Add document. Supported formats are PDF, PNG, JPG, and TXT, up to ten megabytes. Upload only with permission. Redact sensitive details, and read the consent notice first.",
+        "hi": "Add document चुनें। PDF, PNG, JPG और TXT फ़ाइलें समर्थित हैं; अधिकतम आकार 10 MB है। अनुमति होने पर ही अपलोड करें। संवेदनशील जानकारी छिपाएँ और पहले सहमति सूचना पढ़ें।"
+      },
+      "start": 16.041666666666664,
+      "end": 29.624999999999996,
+      "segments": [
+        {
+          "en": "Choose Add document. Supported formats are PDF, PNG, JPG, and TXT, up to ten megabytes.",
+          "hi": "Add document चुनें। PDF, PNG, JPG और TXT फ़ाइलें समर्थित हैं; अधिकतम आकार 10 MB है।",
+          "start": 16.041666666666664,
+          "end": 23.562981666666666
+        },
+        {
+          "en": "Upload only with permission. Redact sensitive details, and read the consent notice first.",
+          "hi": "अनुमति होने पर ही अपलोड करें। संवेदनशील जानकारी छिपाएँ और पहले सहमति सूचना पढ़ें।",
+          "start": 23.916666666666664,
+          "end": 29.298299666666665
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "title": {
+        "en": "Review the fields",
+        "hi": "निकाली गई जानकारी जाँचें"
+      },
+      "narration": {
+        "en": "In Review fields, compare each extracted value with the source document. Fix mistakes, check the quoted evidence, and save your corrections.",
+        "hi": "Review fields में हर निकाले गए मान का मूल दस्तावेज़ से मिलान करें। गलतियाँ सुधारें, उद्धृत प्रमाण जाँचें और अपने सुधार सहेजें।"
+      },
+      "start": 29.624999999999996,
+      "end": 38.70833333333333,
+      "segments": [
+        {
+          "en": "In Review fields, compare each extracted value with the source document.",
+          "hi": "Review fields में हर निकाले गए मान का मूल दस्तावेज़ से मिलान करें।",
+          "start": 29.624999999999996,
+          "end": 33.812799999999996
+        },
+        {
+          "en": "Fix mistakes, check the quoted evidence, and save your corrections.",
+          "hi": "गलतियाँ सुधारें, उद्धृत प्रमाण जाँचें और अपने सुधार सहेजें।",
+          "start": 34.166666666666664,
+          "end": 38.37092966666666
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "Read each result",
+        "hi": "हर परिणाम समझें"
+      },
+      "narration": {
+        "en": "Choose Run document checks, then read each explanation. Needs attention means review is needed. Not established means evidence is missing or official checks are unavailable. Neither proves fraud or verifies legal title.",
+        "hi": "Run document checks चुनें, फिर हर परिणाम की व्याख्या पढ़ें। Needs attention का अर्थ है समीक्षा ज़रूरी है। Not established का अर्थ है प्रमाण उपलब्ध नहीं है या आधिकारिक जाँच उपलब्ध नहीं है। इनमें से कोई भी धोखाधड़ी का प्रमाण या कानूनी स्वामित्व का सत्यापन नहीं है।"
+      },
+      "start": 38.70833333333333,
+      "end": 51.83333333333333,
+      "segments": [
+        {
+          "en": "Choose Run document checks, then read each explanation.",
+          "hi": "Run document checks चुनें, फिर हर परिणाम की व्याख्या पढ़ें।",
+          "start": 38.70833333333333,
+          "end": 42.06166633333333
+        },
+        {
+          "en": "Needs attention means review is needed.",
+          "hi": "Needs attention का अर्थ है समीक्षा ज़रूरी है।",
+          "start": 42.416666666666664,
+          "end": 44.420203666666666
+        },
+        {
+          "en": "Not established means evidence is missing or official checks are unavailable.",
+          "hi": "Not established का अर्थ है प्रमाण उपलब्ध नहीं है या आधिकारिक जाँच उपलब्ध नहीं है।",
+          "start": 44.74999999999999,
+          "end": 48.71562399999999
+        },
+        {
+          "en": "Neither proves fraud or verifies legal title.",
+          "hi": "इनमें से कोई भी धोखाधड़ी का प्रमाण या कानूनी स्वामित्व का सत्यापन नहीं है।",
+          "start": 49.041666666666664,
+          "end": 51.497993666666666
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "title": {
+        "en": "Take official next steps",
+        "hi": "आधिकारिक अगला कदम उठाएँ"
+      },
+      "narration": {
+        "en": "Open Bihar services for official next steps outside BhuVerify. These links open external services. BhuVerify has not checked their live records.",
+        "hi": "BhuVerify के बाहर आधिकारिक अगले कदम के लिए Bihar services खोलें। ये लिंक बाहरी सेवाएँ खोलते हैं। BhuVerify ने उनके लाइव रिकॉर्ड नहीं जाँचे हैं।"
+      },
+      "start": 51.83333333333333,
+      "end": 62.125,
+      "segments": [
+        {
+          "en": "Open Bihar services for official next steps outside BhuVerify.",
+          "hi": "BhuVerify के बाहर आधिकारिक अगले कदम के लिए Bihar services खोलें।",
+          "start": 51.83333333333333,
+          "end": 56.16875333333333
+        },
+        {
+          "en": "These links open external services. BhuVerify has not checked their live records.",
+          "hi": "ये लिंक बाहरी सेवाएँ खोलते हैं। BhuVerify ने उनके लाइव रिकॉर्ड नहीं जाँचे हैं।",
+          "start": 56.49999999999999,
+          "end": 61.79238099999999
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "title": {
+        "en": "Make reading easier",
+        "hi": "पढ़ना आसान बनाएँ"
+      },
+      "narration": {
+        "en": "Open Reading settings to adjust text size, high contrast, and reduced motion. English and Hindi captions, and a written transcript, help you follow this video.",
+        "hi": "अक्षरों का आकार, उच्च कंट्रास्ट और कम गति चुनने के लिए Reading settings खोलें। अंग्रेज़ी और हिंदी कैप्शन तथा लिखित प्रतिलिपि इस वीडियो को समझने में मदद करते हैं।"
+      },
+      "start": 62.125,
+      "end": 72.54166666666667,
+      "segments": [
+        {
+          "en": "Open Reading settings to adjust text size, high contrast, and reduced motion.",
+          "hi": "अक्षरों का आकार, उच्च कंट्रास्ट और कम गति चुनने के लिए Reading settings खोलें।",
+          "start": 62.125,
+          "end": 67.133753
+        },
+        {
+          "en": "English and Hindi captions, and a written transcript, help you follow this video.",
+          "hi": "अंग्रेज़ी और हिंदी कैप्शन तथा लिखित प्रतिलिपि इस वीडियो को समझने में मदद करते हैं।",
+          "start": 67.45833333333333,
+          "end": 72.21534033333333
+        }
+      ]
+    },
+    {
+      "id": "help",
+      "title": {
+        "en": "Keep the guide close",
+        "hi": "मार्गदर्शिका साथ रखें"
+      },
+      "narration": {
+        "en": "Return to How it works whenever you need guidance. Keep original documents, verify through official sources, and seek qualified advice before a property decision.",
+        "hi": "जब भी मदद चाहिए, How it works पर वापस आएँ। मूल दस्तावेज़ सुरक्षित रखें, आधिकारिक स्रोतों से सत्यापन करें और संपत्ति का निर्णय लेने से पहले योग्य विशेषज्ञ की सलाह लें।"
+      },
+      "start": 72.54166666666667,
+      "end": 82.66666666666667,
+      "segments": [
+        {
+          "en": "Return to How it works whenever you need guidance.",
+          "hi": "जब भी मदद चाहिए, How it works पर वापस आएँ।",
+          "start": 72.54166666666667,
+          "end": 75.12638366666667
+        },
+        {
+          "en": "Keep original documents, verify through official sources, and seek qualified advice before a property decision.",
+          "hi": "मूल दस्तावेज़ सुरक्षित रखें, आधिकारिक स्रोतों से सत्यापन करें और संपत्ति का निर्णय लेने से पहले योग्य विशेषज्ञ की सलाह लें।",
+          "start": 75.45833333333334,
+          "end": 82.30627033333334
+        }
+      ]
+    }
+  ]
+}
